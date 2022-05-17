@@ -1,0 +1,41 @@
+module Susceptible
+{
+
+		item MaskBox_Blue
+    {
+		DisplayCategory = Accessory,
+        Weight	=	2.0,
+        Type	=	Normal,
+        DisplayName	=	Box of Masks (Blue),
+        Icon	=	MaskBox,
+        WorldStaticModel = MaskBox,
+    }
+		item MaskBox_Green
+    {
+		DisplayCategory = Accessory,
+        Weight	=	2.0,
+        Type	=	Normal,
+        DisplayName	=	Box of Masks (Green),
+        Icon	=	MaskBox,
+        WorldStaticModel = MaskBox,
+    }
+		item EmptyMaskBox_Blue
+    {
+		DisplayCategory = Accessory,
+        Weight	=	0.02,
+        Type	=	Normal,
+        DisplayName	=	Empty Box of Masks (Blue),
+        Icon	=	EmptyMaskBox,
+        WorldStaticModel = EmptyMaskBox,
+    }
+		item EmptyMaskBox_Green
+    {
+		DisplayCategory = Accessory,
+        Weight	=	0.02,
+        Type	=	Normal,
+        DisplayName	=	Empty Box of Masks (Green),
+        Icon	=	EmptyMaskBox,
+        WorldStaticModel = EmptyMaskBox,
+    }
+	
+}

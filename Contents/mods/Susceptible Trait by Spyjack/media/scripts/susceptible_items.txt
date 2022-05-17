@@ -1,0 +1,22 @@
+module Susceptible
+{
+	imports
+	{
+		Base
+	}
+/************************ Masks ************************/
+	item ClothMask
+	{
+  DisplayCategory = Accessory,
+		Type = Clothing,
+		DisplayName = Cloth Mask,
+		ClothingItem = Hat_BandanaMaskTINT,
+		BodyLocation = Mask,
+		Icon = Handkerchief,
+		CanHaveHoles  = false,
+        ChanceToFall = 30,
+        Insulation = 0.10,
+		Weight = 0.1, 
+    }
+	
+}

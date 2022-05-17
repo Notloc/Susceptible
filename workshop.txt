@@ -1,0 +1,154 @@
+version=1
+id=2795677303
+title=Susceptible Trait by Spyjack
+description=[b]DISCLAIMER:[/b] The original concept of Susceptible was created by [b]Spyjack[/b]!
+description=
+description=Check out the original in his amazing map + scenario, [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2496664082] Facility-7 [/url][/b]!
+description=
+description=======================================================
+description=
+description=Have you ever wanted to be [b]one of the non-immune[/b] mentioned in the TV & radio?
+description=
+description=Have you ever wanted to live in [b]true fear[/b] of the Knox Infection?
+description=
+description=Have you ever wanted the [b]true hardcore apocalyptic experience[/b]?
+description=
+description=Have you ever wanted to subject yourself to punishment for [i]seemingly no reason[/i]?
+description=
+description=[b]Well now you can![/b]
+description=
+description=======================================================
+description=
+description=[b]WARNING: THIS IS A HARDCORE TRAIT![/b]
+description=
+description=[b]ALL NEW UPDATES SOON![/b]
+description=
+description=[b]COMPATIBLE WITH LATEST VERSION OF BUILD 41[/b]
+description=
+description=======================================================
+description=
+description=As you may know (or not), our characters within the Project Zomboid lore are people who were lucky enough to be naturally immune to the airbourne strain of the Knox Infection.
+description=
+description=This hardcore mod adds a negative trait that allows you to play as a character who was not so fortunate.
+description=
+description=[h1]How does this mod work?[/h1]
+description=This mod adds the trait ‘Susceptible’ as a negative trait for +7 points.
+description=
+description=With the Susceptible trait, your character is at risk of contracting the airborne Knox Infection when near zombies. While getting close to a single zombie will not necessarily instantly render you infected, there will always be a chance! Naturally, the more zombies there are and the closer you get, the greater the risk!
+description=( Zombie corpses are not counted, only live zombies. [i]Are they really alive?[/i])
+description=
+description=[h2]To survive you'll have to mask up![/h2]
+description=You can prevent infection from the airborne virus by wearing face masks, certain headgear, or a hazmat suit! Some more examples are listed below.
+description=
+description=As masks are worn, they will degrade over time- this is due to the number of potentially infected particulates dirtying and clogging the materials until they’re rendered useless. This means that the more dangerous the air is, the faster your mask will degrade.
+description=
+description=Certain traits, such as ‘Resilient’ and ‘Prone to illness’ will also have an effect on the distance and chance of infection. Rumors also say that one time, a 'Lucky' individual got a face full of the virus, yet nothing happened. Unfortunately, he died to a horde the next day, so we couldn't confirm.
+description=
+description=[h1]What masks/headgear can protect me?[/h1]
+description=Masks and certain headgear will protect you from getting infected when in close proximity to zombies.
+description=
+description=For the sake of gameplay variety, we've added masks and headgear that may not necessarily be considered ‘air filtering’. If this bothers you, roleplay that your character has a bandana/cloth underneath their headgear to act as a filter.
+description=
+description=Keep in mind that masks have varying degradation rates, becoming absolutely worthless when they reach 0 condition! Luckily, the degradation rates of the higher quality masks will take a long time if you avoid hordes, so ([b]best of luck out there![/b])
+description=
+description=Tiers are based on how long it takes for that mask/headgear to reach condition 0. No matter what their condition (unless it's 0), it will protect you from the virus.
+description=
+description=E.g. A gas mask or a bandana both provide 100% protection, unless their condition reaches 0- then they stop working.
+description=
+description=[b]Tier 5[/b] = Most durable protective equipment (Will take longer to reach 0 condition).
+description=
+description=[b]Tier 1[/b] = Least durable protective equipment (Will reach 0 condition the quickest).
+description=
+description=[table]
+description=    [tr]
+description=        [th]Mask / Headgear[/th]
+description=        [th] Tier [/th]
+description=    [/tr]
+description=    [tr]
+description=        [td]Hazmat Suit[/td]
+description=        [td] 5 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td][b](Mod)[/b] 'Brita' Gas Masks[/td]
+description=        [td] 4 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td](Vanilla) Gas Mask[/td]
+description=        [td] 4 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Biochemical Mask[/td]
+description=        [td] 4 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td][b](Mod)[/b]'Undead Survivor' Masks[/td]
+description=        [td] 3 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Medical Mask (Blue & Green)[/td]
+description=        [td] 3 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Dust Mask[/td]
+description=        [td] 3 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Welder Mask[/td]
+description=        [td] 2 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Full Motorcycle Helmet[/td]
+description=        [td] 2 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Riot Helmet[/td]
+description=        [td] 2 [/td]
+description=    [/tr]
+description=    [tr]
+description=        [td]Bandana (Face-covering)[/td]
+description=        [td] 1 [/td]
+description=    [/tr]
+description=[/table]
+description=
+description=[b]NEWLY ADDED:[/b] You can now craft a bandana face mask at the start of the game. [b][i]Use this to your advantage, but beware! This mask may struggle to keep you safe if the air is too polluted![/i][/b]
+description=
+description=This mod does not add any additional masks or headgear to the game (yet) and primarily uses those within the vanilla game. However, masks and gear from other mods are supported with more being added constantly!
+description=
+description=Are there any masks from modpacks you'd like included? [b][i]Let us know![/i][/b]
+description=
+description=======================================================
+description=
+description=[h1]MOD COMPATIBILITY:[/h1]
+description=[*]Supports masks & headgear in [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2460154811]Brita's Armour Pack[/url][/b].
+description=
+description=[*]Supports the masks in [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2713921292]Undead Survivor[/url][/b].
+description=
+description=[*][i]Should[/i] be compatible with [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2760742937&searchtext=]Working Masks[/url][/b], as there shouldn't be any conflict in how they function.
+description=
+description=
+description=[h1]MOD RECOMMENDATIONS:[/h1]
+description=[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2713921292]Undead Survivor[/url][/b] - Very well done clothing mod that really brings that apocalyptic aesthetic, especially months into a game. [b][i]Also gas mask compatible![/i][/b]
+description=
+description=[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2460154811]Brita's Armour Pack[/url][/b] - As well as having many cool armour & clothing, it also provides a much larger variety of gas masks & helmets for you to use with this mod.
+description=
+description=[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2725378876&searchtext=]They Knew[/url][/b] - If you're seeking a hardcore but slightly more forgiving experience, I'd recommend this mod. It'll allow you to find special zombies that may have a zombie cure.
+description=
+description=[*][b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2663369937]Echo Station[/url][/b] - A superb "end-game" dungeon located at the super secret military base in <REDACTED>, made by super modder Erin Azakaela. Not only does it add a cool endgame 'objective' to explore, but you can also roleplay being a test subject within the base. Works great with this mod or the [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2496664082] Facility-7 [/url][/b] 'Test Tube Subject' profession and custom traits!
+description=
+description=======================================================
+description=
+description=[h1]Top tips & warnings:[/h1]
+description=[*]You won’t spawn with a mask, for added unprepared realism! Either craft a face mask or hide in fear like a true survivor!
+description=
+description=[*]Be careful to not fall over and drop your mask, it could mean your death if in the wrong circumstance!
+description=
+description=[*]Remember, some headgear items will fall off if they are hit when attacked by a zombie. This will almost certainly mean death!
+description=
+description=======================================================
+description=
+description=[h1]Future Plans:[/h1]
+description=[*]Add compatibility for the 'They Knew' hazmat suit.
+description=
+description=[*]Option to find recipes to craft homemade face masks & gas masks - [i]Currently being worked on[/i].
+tags=Build 41;Hardmode;Realistic;Traits
+visibility=public
