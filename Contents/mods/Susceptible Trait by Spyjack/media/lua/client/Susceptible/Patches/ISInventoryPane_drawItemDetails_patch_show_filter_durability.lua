@@ -6,23 +6,26 @@ local fgText = {r=0.6, g=0.8, b=0.5, a=0.6}
 ISInventoryPane.drawItemDetails_prepatch_susceptible = ISInventoryPane.drawItemDetails;
 
 ISInventoryPane.drawItemDetails = function(self, item, y, xoff, yoff, red)
+	self:drawItemDetails_prepatch_susceptible(item, y, xoff, yoff, red);
+
 	if item == nil then
         return;
     end
-
-	self:drawItemDetails_prepatch_susceptible(item, y, xoff, yoff, red);
-
-	local top = self.headerHgt + y * self.itemHgt + yoff
-
+	
 	if SusceptibleMaskItems[item:getType()] then
-		local data = item:getModData()
-		local delta = 1;
-		if data.filterDurability then
-			delta = data.filterDurability / data.filterDurabilityMax;
-		end
-
+		local delta = getFilterDelta(item);
+		local top = self.headerHgt + y * self.itemHgt + yoff;
 		self:drawSuceptibleConditionProgressBar(item:getName(), delta, xoff, top, fgText, fgBar)
 	end
+end
+
+local function getFilterDelta(item)
+	local delta = 1;
+	local data = item:getModData()
+	if data.filterDurability then
+		delta = data.filterDurability / data.filterDurabilityMax;
+	end
+	return delta;
 end
 
 function ISInventoryPane:drawSuceptibleConditionProgressBar(itemName, fraction, xoff, top, fgText, fgBar)
