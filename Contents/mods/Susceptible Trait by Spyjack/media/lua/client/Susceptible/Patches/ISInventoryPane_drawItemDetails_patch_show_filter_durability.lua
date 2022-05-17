@@ -3,6 +3,15 @@ require "Susceptible/SusceptibleMaskData"
 local fgBar = {r=0.0, g=0.6, b=0.0, a=0.7}
 local fgText = {r=0.6, g=0.8, b=0.5, a=0.6}
 
+local getFilterDelta = function(item)
+	local delta = 1;
+	local data = item:getModData()
+	if data.filterDurability then
+		delta = data.filterDurability / data.filterDurabilityMax;
+	end
+	return delta;
+end
+
 ISInventoryPane.drawItemDetails_prepatch_susceptible = ISInventoryPane.drawItemDetails;
 
 ISInventoryPane.drawItemDetails = function(self, item, y, xoff, yoff, red)
@@ -17,15 +26,6 @@ ISInventoryPane.drawItemDetails = function(self, item, y, xoff, yoff, red)
 		local top = self.headerHgt + y * self.itemHgt + yoff;
 		self:drawSuceptibleConditionProgressBar(item:getName(), delta, xoff, top, fgText, fgBar)
 	end
-end
-
-local function getFilterDelta(item)
-	local delta = 1;
-	local data = item:getModData()
-	if data.filterDurability then
-		delta = data.filterDurability / data.filterDurabilityMax;
-	end
-	return delta;
 end
 
 function ISInventoryPane:drawSuceptibleConditionProgressBar(itemName, fraction, xoff, top, fgText, fgBar)
