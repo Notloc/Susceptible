@@ -13,5 +13,17 @@ module Base
 		texture = Worlditems/MaskBox,
 		scale = 0.01,
 	}
+	model GasmaskFilter
+	{
+		mesh = WorldItems/GasmaskFilter,
+		texture = Worlditems/GasmaskFilter,
+		scale = 0.01,
+	}
+	model OxygenTank
+	{
+		mesh = WorldItems/OxygenTank,
+		texture = Worlditems/OxygenTank,
+		scale = 0.01,
+	}
 	
 }

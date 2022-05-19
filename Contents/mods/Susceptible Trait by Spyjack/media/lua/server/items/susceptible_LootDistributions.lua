@@ -13,8 +13,6 @@ table.insert(ProceduralDistributions.list["SafehouseMedical"].items, "Susceptibl
 table.insert(ProceduralDistributions.list["SafehouseMedical"].items, 40);
 table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, "Susceptible.MaskBox_Blue");
 table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, 10);
-table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, "Susceptible.MaskBox_Blue");
-table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, 10);
 table.insert(ProceduralDistributions.list["StoreShelfMedical"].items, "Susceptible.MaskBox_Blue");
 table.insert(ProceduralDistributions.list["StoreShelfMedical"].items, 3);
 
@@ -49,3 +47,45 @@ table.insert(ProceduralDistributions.list["StoreShelfMedical"].items, "Susceptib
 table.insert(ProceduralDistributions.list["StoreShelfMedical"].items, 8);
 table.insert(ProceduralDistributions.list["SafehouseMedical"].items, "Susceptible.EmptyMaskBox_Green");
 table.insert(ProceduralDistributions.list["SafehouseMedical"].items, 2);
+
+
+-- Equipment Repair Items --
+
+--Gas  Mask Filter  --
+--Army base + Safehouse
+table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmyStorageMedical"].items, 40);
+table.insert(ProceduralDistributions.list["SafehouseMedical"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["SafehouseMedical"].items, 40);
+table.insert(ProceduralDistributions.list["LockerArmyBedroom"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["LockerArmyBedroom"].items, 3);
+table.insert(ProceduralDistributions.list["ArmyStorageOutfit"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmyStorageOutfit"].items, 40);
+table.insert(ProceduralDistributions.list["ArmyHangarTools"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmyHangarTools"].items, 3);
+
+--Army Surplus
+table.insert(ProceduralDistributions.list["ArmySurplusOutfit"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmySurplusOutfit"].items, 20);
+table.insert(ProceduralDistributions.list["ArmySurplusMisc"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmySurplusMisc"].items, 20);
+table.insert(ProceduralDistributions.list["ArmySurplusTools"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["ArmySurplusTools"].items, 5);
+
+--Police station + prison 
+table.insert(ProceduralDistributions.list["PoliceLockers"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["PoliceLockers"].items, 20);
+table.insert(ProceduralDistributions.list["PoliceStorageOutfit"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["PoliceStorageOutfit"].items, 40);
+table.insert(ProceduralDistributions.list["PoliceStorageGuns"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["PoliceStorageGuns"].items, 5);
+table.insert(ProceduralDistributions.list["PoliceStorageAmmunition"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["PoliceStorageAmmunition"].items, 5);
+
+--Fire station
+table.insert(ProceduralDistributions.list["FireDeptLockers"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["FireDeptLockers"].items, 10);
+table.insert(ProceduralDistributions.list["FireStorageTools"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["FireStorageTools"].items, 20);
+table.insert(ProceduralDistributions.list["FireStorageOutfit"].items, "Susceptible.GasmaskFilter");
+table.insert(ProceduralDistributions.list["FireStorageOutfit"].items, 40);
