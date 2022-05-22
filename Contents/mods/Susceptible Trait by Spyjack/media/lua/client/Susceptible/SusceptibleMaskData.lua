@@ -1,18 +1,34 @@
+local NONE = "None";
+local CLOTH = "Cloth";
+local FILTER = "Filter";
+local WASH = "Wash";
+
+SusceptibleRepairTypes = {
+	NONE = NONE,
+	CLOTH = CLOTH,
+	FILTER = FILTER,
+	WASH = WASH,
+	DEFAULT = CLOTH,
+};
+
+-- quality defaults to infinite
+-- repairType defaults to CLOTH
+
 SusceptibleMaskItems = {
-	HazmatSuit =                                          { durability=300 },
-	MysteriousHazmat =                                    { durability=300 },    
-	CEDAHazmatSuit =                                      { durability=300 },    
-	HazmatSuitCEDANoShoes =                               { durability=300 },    
-	CEDAHazmatSuitBlack =                                 { durability=300 },    
-	CEDAHazmatSuitBlackNoShoes =                          { durability=300 },    
-	CEDAHazmatSuitBlue =                                  { durability=300 },    
-	CEDAHazmatSuitBlueNoShoes =                           { durability=300 },    
-	CEDAHazmatSuitRed =                                   { durability=300 },    
-	CEDAHazmatSuitRedNoShoes =                            { durability=300 },    
-	NBHHazmatSuit =                                       { durability=300 },    
-	NBHHazmatSuitNoShoes =                                { durability=300 },
-	HazmatSuit2 =                                         { durability=300 },        
-	HazmatSuit2NoShoes =                                  { durability=300 },
+	HazmatSuit =                                          { durability=300, repairType=NONE },
+	MysteriousHazmat =                                    { durability=300, repairType=NONE },    
+	CEDAHazmatSuit =                                      { durability=300, repairType=NONE },    
+	HazmatSuitCEDANoShoes =                               { durability=300, repairType=NONE },    
+	CEDAHazmatSuitBlack =                                 { durability=300, repairType=NONE },    
+	CEDAHazmatSuitBlackNoShoes =                          { durability=300, repairType=NONE },    
+	CEDAHazmatSuitBlue =                                  { durability=300, repairType=NONE },    
+	CEDAHazmatSuitBlueNoShoes =                           { durability=300, repairType=NONE },    
+	CEDAHazmatSuitRed =                                   { durability=300, repairType=NONE },    
+	CEDAHazmatSuitRedNoShoes =                            { durability=300, repairType=NONE },    
+	NBHHazmatSuit =                                       { durability=300, repairType=NONE },    
+	NBHHazmatSuitNoShoes =                                { durability=300, repairType=NONE },
+	HazmatSuit2 =                                         { durability=300, repairType=NONE },        
+	HazmatSuit2NoShoes =                                  { durability=300, repairType=NONE },
 	Hat_M17Doff =                                         { durability=300 },
 	Hat_M40Doff =                                         { durability=300 },
 
