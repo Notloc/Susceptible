@@ -17,10 +17,6 @@ local INFECTION_ROLLS_PER_SECOND = 10 -- This number should evenly divide 60. No
 
 local maskItems = SusceptibleMaskItems;
 
-function SusceptibleMod.initTraitData(player)
-    SusceptibleMod.trait = TraitFactory.addTrait("Susceptible", getText("UI_trait_Susceptible"), -11, getText("UI_trait_SusceptibleDesc"), false, false);
-end
-
 function SusceptibleMod.hasEquippedMask(player)
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
     return mask ~= nil;
@@ -398,7 +394,6 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
     end
 end
 
-Events.OnGameBoot.Add(SusceptibleMod.initTraitData);
 Events.OnPlayerUpdate.Add(SusceptibleMod.onPlayerUpdate);
 Events.EveryTenMinutes.Add(SusceptibleMod.onGasMaskDrain);
 Events.OnPlayerDeath.Add(SusceptibleMod.removeUi);
