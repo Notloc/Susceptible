@@ -6,7 +6,7 @@ ISEatFoodAction.start_prepatch_susceptible = ISEatFoodAction.start;
 
 
 ISEatFoodAction.start = function(self)
-	if self.character:HasTrait("Susceptible") then
+	if SusceptibleMod.isPlayerSusceptible(self.character) then
 		local threat = SusceptibleMod.threatByPlayer[self.character];
 		if threat and threat > 0 then
 			self:forceStop();

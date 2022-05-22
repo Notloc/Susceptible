@@ -9,10 +9,6 @@ if not SusceptibleMod then
 end
 
 local BASE_INFECTION_DISTANCE = 9;
-local BASE_INFECTION_CHANCE = 0.0034;
-local ACTIVE_PROTECTION_DURABILITY_COST_MULT = 0.06
-local THREAT_REDUCTION_PER_QUALITY = 10
-
 local INFECTION_ROLLS_PER_SECOND = 10 -- This number should evenly divide 60. Not a hard requirement, but nicer.
 
 local maskItems = SusceptibleMaskItems;
@@ -54,7 +50,7 @@ function SusceptibleMod.shouldPlayerUpdate(player, playerData)
 end
 
 function SusceptibleMod.onPlayerUpdate(player)
-    if not player:HasTrait("Susceptible") or not SusceptibleMod.shouldPlayerUpdate(player) then
+    if not SusceptibleMod.isPlayerSusceptible(player) or not SusceptibleMod.shouldPlayerUpdate(player) then
         return;
     end
     
@@ -134,7 +130,7 @@ function SusceptibleMod.calculateThreat(player)
 end
 
 function SusceptibleMod.calculateInfectionChance(player, threatLevel)
-    local infectionChance = BASE_INFECTION_CHANCE;
+    local infectionChance = SandboxVars.Susceptible.BaseInfectionChance;
     if player:HasTrait("ProneToIllness") then
         infectionChance = infectionChance * 1.5;
     end
@@ -283,10 +279,11 @@ function SusceptibleMod.reduceThreatWithMask(player, threatLevel)
         playerData.blockedThreats = 0;
     end
 
-    SusceptibleMod.damageMask(item, mask, threatLevel * ACTIVE_PROTECTION_DURABILITY_COST_MULT / INFECTION_ROLLS_PER_SECOND);
+    local maskDamageRate = SandboxVars.Susceptible.MaskDamageRate / (100 * INFECTION_ROLLS_PER_SECOND);
+    SusceptibleMod.damageMask(item, mask, threatLevel * maskDamageRate);
 
     if mask.quality then
-        return threatLevel - (mask.quality * THREAT_REDUCTION_PER_QUALITY);
+        return threatLevel - (mask.quality * SandboxVars.Susceptible.MaskFilteringPower);
     else
         return 0;
     end
@@ -300,7 +297,7 @@ function SusceptibleMod.onGasMaskDrain()
 end
 
 function SusceptibleMod.onPlayerGasMaskDrain(player)
-    if not player or not player:HasTrait("Susceptible") then
+    if not player or not SusceptibleMod.isPlayerSusceptible(player) then
         return;
     end
 
@@ -387,11 +384,15 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
             quality = 99999;
         end
 
-        local threatDelta = threatLevel / (quality * THREAT_REDUCTION_PER_QUALITY);
+        local threatDelta = threatLevel / (quality * SandboxVars.Susceptible.MaskFilteringPower);
         SusceptibleMod.uiByPlayer[player]:updateMaskInfo(item, maskDelta, threatDelta)
     else
         SusceptibleMod.uiByPlayer[player]:updateMaskInfo(nil, 0, threatLevel)
     end
+end
+
+function SusceptibleMod.isPlayerSusceptible(player)
+    return SandboxVars.Susceptible.EveryoneIsSusceptible or player:HasTrait("Susceptible");
 end
 
 Events.OnPlayerUpdate.Add(SusceptibleMod.onPlayerUpdate);
