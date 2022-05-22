@@ -319,8 +319,8 @@ function SusceptibleMod.onPlayerGasMaskDrain(player)
 end
 
 function SusceptibleMod.initMaskDurability(mask, itemModData)
-    itemModData.filterDurabilityMax = mask.drainCap;
-    itemModData.filterDurability = mask.drainCap;
+    itemModData.filterDurabilityMax = mask.durability;
+    itemModData.filterDurability = mask.durability;
 end
 
 function SusceptibleMod.damageMask(item, mask, damage)
