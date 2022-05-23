@@ -1,4 +1,5 @@
 require "Susceptible/SusceptibleMaskData"
+local SusUtil = require "Susceptible/SusceptibleUtil"
 
 local function getRepairType(maskData)
 	if not maskData or not maskData.repairType then
@@ -6,16 +7,6 @@ local function getRepairType(maskData)
 	else
 		return maskData.repairType;
 	end
-end
-
-local function isFilter(item)
-	return item:getType() == "GasmaskFilter";
-end
-
-local function getFilters(inventory)
-	local filtersOut = ArrayList.new();
-	inventory:getAllEval(isFilter, filtersOut);
-	return filtersOut;
 end
 
 local function getConditionPercent(filter)
@@ -27,34 +18,12 @@ local function getConditionPercent(filter)
 	return cond.."%";
 end
 
-local function ensureFilterData(filterModData)
-	if not filterModData.filterDelta then
-		filterModData.filterDelta = 1;
+local function swapOrInsertFilter(mask, filter, player)
+	if SusUtil.containsFilter(mask) then
+		SusUtil.removeFilter(mask, player);
 	end
+	SusUtil.insertFilter(mask, filter, player);
 end
-
-local function ensureMaskData(mask, maskModData) 
-	if not maskModData.filterDurabilityMax then
-		local maskInfo = SusceptibleMaskItems[mask:getType()];
-		maskModData.filterDurabilityMax = maskInfo.durability;
-		maskModData.filterDurability = maskInfo.durability;
-	end
-end
-
-local function swapFilter(mask, filter, player)
-	local filterData = filter:getModData();
-	ensureFilterData(filterData);
-
-	local maskData = mask:getModData();
-	ensureMaskData(mask, maskData);
-
-	local inDelta = filterData.filterDelta;
-	local outDelta = maskData.filterDurability / maskData.filterDurabilityMax;
-
-	filterData.filterDelta = outDelta;
-	maskData.filterDurability = inDelta * maskData.filterDurabilityMax;
-end
-
 
 ISInventoryPaneContextMenu.createMenu_prepatch_susceptible = ISInventoryPaneContextMenu.createMenu;
 ISInventoryPaneContextMenu.createMenu = function(player, isInPlayerInventory, items, x, y, origin)
@@ -83,27 +52,37 @@ ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, is
 		return;
 	end
 
---[[	if repairType == SusceptibleRepairTypes.CLOTH then
+	if repairType == "SusceptibleRepairTypes.CLOTH" then
 
-		local option = context:addOption(getText("Swap Filter"))
+		local option = context:addOption(getText("UI_Susceptible_Swap_Filter"))
 		local subMenu = context:getNew(context)
 		context:addSubMenu(option, subMenu)
 
-	elseif repairType == SusceptibleRepairTypes.FILTER then--]]
+	elseif repairType ~= SusceptibleRepairTypes.FILTER then--]]
 		local playerObj = getSpecificPlayer(player)
     	local playerInv = playerObj:getInventory()
 
-
-		local filters = getFilters(playerInv);
+		local filters = SusUtil.findAllFilters(playerInv);
 		if filters:size() > 0 then
-			local option = context:addOption(getText("Swap Filter"))
+			local hasFilter = SusUtil.containsFilter(item);
+
+			local optionText = getText("UI_Susceptible_Swap_Filter");
+			if not hasFilter then
+				optionText = getText("UI_Susceptible_Insert_Filter");
+			end
+
+			local option = context:addOption(optionText)
 			local subMenu = context:getNew(context)
 			context:addSubMenu(option, subMenu)
 
 			for i=1,filters:size() do
 				local filter = filters:get(i-1);
-				subMenu:addOption(getText("Filter: ")..getConditionPercent(filter), item, swapFilter, filter, playerObj);
+				subMenu:addOption(getText("UI_Susceptible_Filter").." - "..getConditionPercent(filter), item, swapOrInsertFilter, filter, playerObj);
 			end
 		end
-	--end
+
+		if SusUtil.containsFilter(item) then
+			context:addOption(getText("UI_Susceptible_Remove_Filter"), item, SusUtil.removeFilter, playerObj);
+		end
+	end
 end
