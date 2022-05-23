@@ -1,13 +1,5 @@
 require "Susceptible/SusceptibleMaskData"
 
-ISInventoryPaneContextMenu.createMenu_prepatch_susceptible = ISInventoryPaneContextMenu.createMenu;
-ISInventoryPaneContextMenu.createMenu = function(self, player, isInPlayerInventory, items, x, y, origin)
-	local context = self:createMenu_prepatch_susceptible(player, isInPlayerInventory, items, x, y, origin);
-	--self:addFilterRepairOptions(context, player, isInPlayerInventory, items, x, y, origin);
-	return context;
-end
-
-
 local function getRepairType(maskData)
 	if not maskData or not maskData.repairType then
 		return SusceptibleRepairTypes.DEFAULT;
@@ -50,10 +42,10 @@ local function ensureMaskData(mask, maskModData)
 end
 
 local function swapFilter(mask, filter, player)
-	local filterData = filter.getModData();
+	local filterData = filter:getModData();
 	ensureFilterData(filterData);
 
-	local maskData = mask.getModData();
+	local maskData = mask:getModData();
 	ensureMaskData(mask, maskData);
 
 	local inDelta = filterData.filterDelta;
@@ -63,26 +55,41 @@ local function swapFilter(mask, filter, player)
 	maskData.filterDurability = inDelta * maskData.filterDurabilityMax;
 end
 
-ISInventoryPaneContextMenu.addFilterRepairOptions = function(self, context, player, isInPlayerInventory, items, x, y, origin)
-	if not context or not isInPlayerInventory or #items ~= 1 or not instanceof(items[1], "InventoryItem") then
+
+ISInventoryPaneContextMenu.createMenu_prepatch_susceptible = ISInventoryPaneContextMenu.createMenu;
+ISInventoryPaneContextMenu.createMenu = function(player, isInPlayerInventory, items, x, y, origin)
+	local context = ISInventoryPaneContextMenu.createMenu_prepatch_susceptible(player, isInPlayerInventory, items, x, y, origin);
+	ISInventoryPaneContextMenu.addFilterRepairOptions(context, player, isInPlayerInventory, items, x, y, origin);
+	return context;
+end
+
+ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, isInPlayerInventory, items, x, y, origin)
+	if not context or not isInPlayerInventory or #items ~= 1 then
 		return;
 	end
 
 	local item = items[1]
+    if not instanceof(item, "InventoryItem") then
+        if #item.items == 2 then
+            item = item.items[1];
+        else
+        	return
+        end
+    end
+
 	local maskData = SusceptibleMaskItems[item:getType()];
 	local repairType = getRepairType(maskData);
 	if not maskData or repairType == SusceptibleRepairTypes.NONE then
 		return;
 	end
 
-
-	if repairType == SusceptibleRepairTypes.CLOTH then
+--[[	if repairType == SusceptibleRepairTypes.CLOTH then
 
 		local option = context:addOption(getText("Swap Filter"))
 		local subMenu = context:getNew(context)
 		context:addSubMenu(option, subMenu)
 
-	elseif repairType == SusceptibleRepairTypes.FILTER then
+	elseif repairType == SusceptibleRepairTypes.FILTER then--]]
 		local playerObj = getSpecificPlayer(player)
     	local playerInv = playerObj:getInventory()
 
@@ -98,5 +105,5 @@ ISInventoryPaneContextMenu.addFilterRepairOptions = function(self, context, play
 				subMenu:addOption(getText("Filter: ")..getConditionPercent(filter), item, swapFilter, filter, playerObj);
 			end
 		end
-	end
+	--end
 end
