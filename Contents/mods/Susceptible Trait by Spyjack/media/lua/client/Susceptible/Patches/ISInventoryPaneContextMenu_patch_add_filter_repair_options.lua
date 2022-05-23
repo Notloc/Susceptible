@@ -58,7 +58,7 @@ ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, is
 		local subMenu = context:getNew(context)
 		context:addSubMenu(option, subMenu)
 
-	elseif repairType ~= SusceptibleRepairTypes.FILTER then--]]
+	elseif repairType ~= SusceptibleRepairTypes.FILTER then
 		local playerObj = getSpecificPlayer(player)
     	local playerInv = playerObj:getInventory()
 
