@@ -1,4 +1,5 @@
 SusceptibleMaskItems = {
+-- Hazmat suits + Doffs
     HazmatSuit =              							{ drainCap=300 },
 	MysteriousHazmat =		  							{ drainCap=300 },	
 	CEDAHazmatSuit =		  							{ drainCap=300 },	
@@ -16,6 +17,7 @@ SusceptibleMaskItems = {
     Hat_M17Doff =         								{ drainCap=300 },
     Hat_M40Doff =         								{ drainCap=300 },
 
+-- Gas Masks + Gas mask enclosed helmets
     Hat_GasMask =             							{ drainCap=200 },
     Hat_NBCmask =             							{ drainCap=200 },
 	Hat_SwatGasMask =         							{ drainCap=200 },
@@ -47,21 +49,25 @@ SusceptibleMaskItems = {
 	HWhatdown =          	  							{ drainCap=200 },
     Mask_HECU  =              							{ drainCap=200 },	
     GP5GasMask  =              							{ drainCap=200 },	
-	
+
+-- 	Enclosed military helmets
     Hat_KillaHelmet =         							{ drainCap=190 },
 	Hat_880_Helmet =          							{ drainCap=190 },
     Hat_880_Visor =           							{ drainCap=190 },
     Hat_PSGT_Helmet_Camo =    							{ drainCap=190 },
     Hat_Face_Shield =         							{ drainCap=190 },
 
+-- Unique mod gas masks
     NomadMask =               							{ drainCap=180 },
     OminousNomadMask =        							{ drainCap=180 },
     PrepperMask =             							{ drainCap=180 },
     StalkerMask =             							{ drainCap=180 },
 	RogueMask =               							{ drainCap=180 },
+	ClericMask =          		  						{ drainCap=180 },	
 	Hat_Rebreather =          							{ drainCap=180 },
 	Mjill =          		  							{ drainCap=180 },	
 
+-- Medical Masks & Dust Masks (and mod face masks)
     Hat_SurgicalMask_Blue =   							{ drainCap=120 },
     Hat_SurgicalMask_Green =  							{ drainCap=120 },
     Hat_DustMask =            							{ drainCap=120 },
@@ -83,7 +89,8 @@ SusceptibleMaskItems = {
 	Hat_AdidasFaceMask_Black =            				{ drainCap=120 },	
 	Hat_AdidasFaceMask_White =            				{ drainCap=120 },		
 	Hat_WoodlandFaceMask =            					{ drainCap=120 },		
-	
+
+-- Riot Helmets,Crash Helmets & Welding Masks	
     Hat_CrashHelmetFULL =     							{ drainCap=90 },
     Hat_RiotHelmet =          							{ drainCap=90 },
 	Hat_MilitaryHelmetRiot =   							{ drainCap=90 },
@@ -111,7 +118,7 @@ SusceptibleMaskItems = {
 	Hat_AuthenticCrashHelmetFULLRacing =				{ drainCap=90 },
 	Hat_AuthenticCrashHelmetFULLTINT =					{ drainCap=90 },
 
-	ClothMask =         								{ drainCap=26 },
+-- Bandanas
 	Hat_BandanaMask =         							{ drainCap=26 },
 	Hat_Balaclava_Swat =      							{ drainCap=26 },
 	Hat_PoliceBalaclava =     							{ drainCap=26 },
@@ -129,14 +136,19 @@ SusceptibleMaskItems = {
 	Legion_Bandana_Red =      							{ drainCap=26 },
 	Legion_Bandana_Black_Ohio =           				{ drainCap=26 },
 	Legion_Bandana_Red_Ohio =   						{ drainCap=26 },
-	Legion_Bandana_Blue_Ohio =      					{ drainCap=26 },
+	Legion_Bandana_Blue_Ohio =      					{ drainCap=26 },		
+	Hat_Shemagh =   									{ drainCap=26 },
+	Hat_ShemaghDesert =      							{ drainCap=26 },
+	Hat_ShemaghWoodland =   							{ drainCap=26 },
     Hat_BandanaMaskTINT =     							{ drainCap=26, quality=1 },
+	ClothMask =         								{ drainCap=26, quality=1 },	
 
+-- Improvised masks (not implemented)
     Hat_GasMask_Improvised = 						 	{ drainCap=24 },
     HCImprovisedgasmask =     							{ drainCap=24 },
     HCImprovisedhazmat =      							{ drainCap=24 },
 	
-	
+-- Mod novelty masks	
 	Hat_TrueEyeCult =         							{ drainCap=5 },
 	Hat_GhostFace =           							{ drainCap=5 },
 	Hat_DRLegoHead =          							{ drainCap=5 },
