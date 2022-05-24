@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<outfitManager>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleHazmat</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Hazmat suit -->
+			<itemGUID>430fb60d-a1be-48bd-a6c7-3a19b3116fe5</itemGUID>
+		</m_items>
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleHazmat</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Hazmat Suit -->
+			<itemGUID>430fb60d-a1be-48bd-a6c7-3a19b3116fe5</itemGUID>
+		</m_items>
+	</m_FemaleOutfits>
+
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleMilitary</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Gas Mask -->
+			<itemGUID>92efbe27-baa3-4e7f-bc7c-cb4713d23c14</itemGUID>
+		</m_items>		
+		<m_items> <!-- Camo military jacket -->
+			<probability>0.05</probability>		
+			<itemGUID>b0d642f6-eb11-456c-aeb0-1b190b29a364</itemGUID>
+		</m_items>		
+		<m_items> <!-- Camo military shirt -->
+			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
+		</m_items>
+		<m_items> <!-- Camo trousers -->
+			<itemGUID>d325b65d-497d-4c77-8919-74a65172cb94</itemGUID>
+		</m_items>		
+		<m_items> <!-- Military boots -->
+			<itemGUID>227cb2d5-05a5-44ed-872d-ac4ca16e80bc</itemGUID>
+		</m_items>
+		<m_items> <!-- Watches (TO ADD) -->
+			<probability>0.2</probability>
+			<itemGUID>4cbb081e-0e9a-4248-bec1-0aa226e082e1</itemGUID>
+			<subItems>
+				<itemGUID>c6dd113b-3d04-4833-9f38-8e9840741c0c</itemGUID>
+			</subItems>
+			<subItems>
+				<itemGUID>fedba460-2edc-439d-89b6-f9607ddbf246</itemGUID>
+			</subItems>
+			<subItems>
+				<itemGUID>e4b3135f-a541-4870-a7b9-2ba6f730bc5c</itemGUID>
+			</subItems>
+			<subItems>
+				<itemGUID>5b484f12-b43c-4a83-9009-af05a59ec267</itemGUID>
+			</subItems>
+		</m_items>		
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleMilitary</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Gas Mask -->
+			<itemGUID>92efbe27-baa3-4e7f-bc7c-cb4713d23c14</itemGUID>
+		</m_items>			
+		<m_items> <!-- Camo military jacket -->
+			<probability>0.05</probability>		
+			<itemGUID>b0d642f6-eb11-456c-aeb0-1b190b29a364</itemGUID>
+		</m_items>				
+		<m_items> <!-- Camo military shirt -->
+			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
+		</m_items>
+		<m_items> <!-- Camo trousers -->
+			<itemGUID>d325b65d-497d-4c77-8919-74a65172cb94</itemGUID>
+		</m_items>		
+		<m_items> <!-- Military boots -->
+			<itemGUID>227cb2d5-05a5-44ed-872d-ac4ca16e80bc</itemGUID>
+		</m_items>				
+	</m_FemaleOutfits>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleMilitaryNBC</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- NBC Gas Mask -->
+			<itemGUID>3ecbd0ed-beef-4532-9823-c2a9437e8484</itemGUID>
+		</m_items>
+		<m_items> <!-- Camo military jacket -->
+			<probability>0.05</probability>		
+			<itemGUID>b0d642f6-eb11-456c-aeb0-1b190b29a364</itemGUID>
+		</m_items>				
+		<m_items> <!-- Camo military shirt -->
+			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
+		</m_items>
+		<m_items> <!-- Camo trousers -->
+			<itemGUID>d325b65d-497d-4c77-8919-74a65172cb94</itemGUID>
+		</m_items>		
+		<m_items> <!-- Military Boots -->
+			<itemGUID>227cb2d5-05a5-44ed-872d-ac4ca16e80bc</itemGUID>
+		</m_items>		
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleMilitaryNBC</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>false</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- NBC Gas Mask -->
+			<itemGUID>3ecbd0ed-beef-4532-9823-c2a9437e8484</itemGUID>
+		</m_items>
+		<m_items> <!-- Camo military jacket -->
+			<probability>0.05</probability>		
+			<itemGUID>b0d642f6-eb11-456c-aeb0-1b190b29a364</itemGUID>
+		</m_items>				
+		<m_items> <!-- Camo military shirt -->
+			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
+		</m_items>	
+		<m_items> <!-- Camo trousers -->
+			<itemGUID>d325b65d-497d-4c77-8919-74a65172cb94</itemGUID>
+		</m_items>			
+		<m_items> <!-- Military Boots -->
+			<itemGUID>227cb2d5-05a5-44ed-872d-ac4ca16e80bc</itemGUID>
+		</m_items>	
+	</m_FemaleOutfits>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleSurvivorMedicalBlue</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>false</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Medical Mask Blue -->
+			<itemGUID>6ef9ba72-73e6-4373-8d29-6beddf2274a5</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>		
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleSurvivorMedicalBlue</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Medical Mask Blue -->
+			<itemGUID>6ef9ba72-73e6-4373-8d29-6beddf2274a5</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>		
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>	
+	</m_FemaleOutfits>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleSurvivorMedicalGreen</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Medical Mask Green -->
+			<itemGUID>b73fbbc8-f390-4b5a-ad4f-b24239c185e1</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>		
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleSurvivorMedicalGreen</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Medical Mask Green -->
+			<itemGUID>b73fbbc8-f390-4b5a-ad4f-b24239c185e1</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>		
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>	
+	</m_FemaleOutfits>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleSurvivorDust</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Dust Mask -->
+			<itemGUID>1d070816-cfec-4d5d-820d-105c514251eb</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>		
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleSurvivorDust</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Dust Mask -->
+			<itemGUID>1d070816-cfec-4d5d-820d-105c514251eb</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>		
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>	
+	</m_FemaleOutfits>
+
+	<m_MaleOutfits>
+		<m_Name>SusceptibleSurvivorBandana</m_Name>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0321bb6a</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Bandana Face Mask -->
+			<itemGUID>7ac27303-88f1-417d-9914-dbc66cbdc84c</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>		
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>	
+	</m_MaleOutfits>
+
+	<m_FemaleOutfits> 
+		<m_Name>SusceptibleSurvivorBandana</m_Name>
+		<m_Guid>52a5e2dd-733e-49c7-bae7-7ecbe72d82b5</m_Guid>
+		<m_Top>false</m_Top>
+		<m_Pants>true</m_Pants>
+		<m_AllowPantsHue>true</m_AllowPantsHue>
+		<m_AllowTopTint>false</m_AllowTopTint>
+		<m_AllowTShirtDecal>false</m_AllowTShirtDecal>
+		<m_items> <!-- Bandana Face Mask -->
+			<itemGUID>7ac27303-88f1-417d-9914-dbc66cbdc84c</itemGUID>
+		</m_items>
+		<m_items> <!-- Hoodie -->
+			<itemGUID>623c97c5-49f2-4763-bafb-549a881d6495</itemGUID>
+		</m_items>		
+		<m_items> <!-- Shoes -->
+			<itemGUID>593bea3d-c127-4574-ac1e-2197dc56e486</itemGUID>
+		</m_items>	
+	</m_FemaleOutfits>
+
+	
+</outfitManager>
