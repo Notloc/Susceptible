@@ -4,4 +4,5 @@ Sandbox_EN = {
 	Sandbox_Susceptible_BaseInfectionChance = "Base Infection Chance",
 	Sandbox_Susceptible_MaskDamageRate = "Mask Damage Rate",
 	Sandbox_Susceptible_MaskFilteringPower = "Mask Filtering Power",
+	Sandbox_Susceptible_SusceptibleSpawnChance = "Masked Zombie Spawn Chance"
 }
