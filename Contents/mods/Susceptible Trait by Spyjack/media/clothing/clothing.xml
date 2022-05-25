@@ -16,7 +16,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleHazmat</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0002bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0001bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>false</m_Pants>
 		<m_AllowPantsHue>false</m_AllowPantsHue>
@@ -80,7 +80,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleMilitary</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0004bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0003bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>false</m_Pants>
 		<m_AllowPantsHue>false</m_AllowPantsHue>
@@ -180,7 +180,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleMilitaryNBC</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0006bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0005bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>false</m_Pants>
 		<m_AllowPantsHue>false</m_AllowPantsHue>
@@ -292,7 +292,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleSurvivorMedicalBlue</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0008bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0007bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>true</m_Pants>
 		<m_AllowPantsHue>true</m_AllowPantsHue>
@@ -399,7 +399,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleSurvivorMedicalGreen</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0010bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0009bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>true</m_Pants>
 		<m_AllowPantsHue>true</m_AllowPantsHue>
@@ -523,7 +523,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleSurvivorDust</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0012bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0011bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>true</m_Pants>
 		<m_AllowPantsHue>true</m_AllowPantsHue>
@@ -647,7 +647,7 @@
 
 	<m_FemaleOutfits> 
 		<m_Name>SusceptibleSurvivorBandana</m_Name>
-		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0014bb6a</m_Guid>
+		<m_Guid>01acfa1b-d246-41b4-9b3a-e91e0013bb6a</m_Guid>
 		<m_Top>false</m_Top>
 		<m_Pants>true</m_Pants>
 		<m_AllowPantsHue>true</m_AllowPantsHue>
