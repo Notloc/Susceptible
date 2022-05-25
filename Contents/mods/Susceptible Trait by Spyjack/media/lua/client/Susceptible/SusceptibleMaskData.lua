@@ -59,6 +59,7 @@ SusceptibleMaskItems = {
 	PrepperMask =                                         { durability=180 },
 	StalkerMask =                                         { durability=180 },
 	RogueMask =                                           { durability=180 },
+	ClericMask =          		  						  { drainCap=180 },	
 	Hat_Rebreather =                                      { durability=180 },
 	Mjill =                                               { durability=180 },    
 
@@ -111,7 +112,6 @@ SusceptibleMaskItems = {
 	Hat_AuthenticCrashHelmetFULLRacing =                  { durability=90 },
 	Hat_AuthenticCrashHelmetFULLTINT =                    { durability=90 },
 
-	ClothMask =                                           { durability=26 },
 	Hat_BandanaMask =                                     { durability=26 },
 	Hat_Balaclava_Swat =                                  { durability=26 },
 	Hat_PoliceBalaclava =                                 { durability=26 },
@@ -130,7 +130,11 @@ SusceptibleMaskItems = {
 	Legion_Bandana_Black_Ohio =                           { durability=26 },
 	Legion_Bandana_Red_Ohio =                             { durability=26 },
 	Legion_Bandana_Blue_Ohio =                            { durability=26 },
+	Hat_Shemagh =   									  { drainCap=26 },
+	Hat_ShemaghDesert =      							  { drainCap=26 },
+	Hat_ShemaghWoodland =   							  { drainCap=26 },	
 	Hat_BandanaMaskTINT =                                 { durability=26, quality=1 },
+	ClothMask =         								  { drainCap=26, quality=1 },
 
 	Hat_GasMask_Improvised =                              { durability=24 },
 	HCImprovisedgasmask =                                 { durability=24 },
