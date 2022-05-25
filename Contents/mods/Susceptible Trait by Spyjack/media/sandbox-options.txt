@@ -1,0 +1,29 @@
+VERSION = 1,
+
+option Susceptible.EveryoneIsSusceptible
+{
+	type = boolean, default = false,
+	page = Susceptible,
+	translation = Susceptible_EveryoneIsSusceptible,
+}
+
+option Susceptible.BaseInfectionChance
+{
+	type = double, min = 0.0001, max = 0.05, default = 0.0034,
+	page = Susceptible,
+	translation = Susceptible_BaseInfectionChance,
+}
+
+option Susceptible.MaskDamageRate
+{
+	type = integer, min = 0, max = 100, default = 6,
+	page = Susceptible,
+	translation = Susceptible_MaskDamageRate,
+}
+
+option Susceptible.MaskFilteringPower
+{
+	type = integer, min = 1, max = 100, default = 10,
+	page = Susceptible,
+	translation = Susceptible_MaskFilteringPower,
+}

@@ -2,4 +2,5 @@ UI_EN = {
 
 UI_trait_Susceptible = "Susceptible",
 UI_trait_SusceptibleDesc = "You are susceptible to the airbourne strain of the Knox infection.<br>You must wear a mask when near zombies to avoid catching the virus.",
+UI_Susceptible_Filter = "Filter"
 }
