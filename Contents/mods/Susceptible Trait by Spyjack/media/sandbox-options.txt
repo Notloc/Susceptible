@@ -27,3 +27,10 @@ option Susceptible.MaskFilteringPower
 	page = Susceptible,
 	translation = Susceptible_MaskFilteringPower,
 }
+
+option SandboxVars.Susceptible.SpawnChance
+{
+	type = integer, min = 1, max = 100, default = 10,
+	page = Susceptible,
+	translation = Susceptible_Susceptible.SpawnChance,
+}
