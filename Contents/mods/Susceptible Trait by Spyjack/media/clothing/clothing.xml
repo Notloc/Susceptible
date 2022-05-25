@@ -101,7 +101,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>eaa559e6-7b6c-4cf1-bf95-7e910a9b1eb8</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 		<m_items> <!-- Camo military shirt -->
 			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
 		</m_items>
@@ -123,7 +124,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>807fade7-aa54-432d-b038-4bf584c79723</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	<m_MaleOutfits>
@@ -149,7 +151,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>eaa559e6-7b6c-4cf1-bf95-7e910a9b1eb8</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 		<m_items> <!-- Camo military shirt -->
 			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
 		</m_items>
@@ -171,7 +174,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>807fade7-aa54-432d-b038-4bf584c79723</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 	</m_MaleOutfits>
 
 	<m_FemaleOutfits> 
@@ -197,7 +201,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>eaa559e6-7b6c-4cf1-bf95-7e910a9b1eb8</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 		<m_items> <!-- Camo military shirt -->
 			<itemGUID>48efaf62-6a65-474a-8773-886e05ea7632</itemGUID>
 		</m_items>	
@@ -219,7 +224,8 @@
 			</subItems>
 			<subItems>
 				<itemGUID>807fade7-aa54-432d-b038-4bf584c79723</itemGUID>
-			</subItems>		
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	<m_MaleOutfits>
@@ -250,6 +256,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -263,6 +270,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -310,6 +318,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -322,7 +331,8 @@
 			</subItems>
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
-			</subItems>					
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	<m_MaleOutfits>
@@ -353,6 +363,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -366,6 +377,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+			</m_items>		
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -381,7 +393,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_MaleOutfits>
 
 	<m_FemaleOutfits> 
@@ -412,6 +425,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -425,6 +439,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -440,7 +455,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	<m_MaleOutfits>
@@ -471,6 +487,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -484,6 +501,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -499,7 +517,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_MaleOutfits>
 
 	<m_FemaleOutfits> 
@@ -530,6 +549,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -543,6 +563,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+			</m_items>		
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -558,7 +579,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	<m_MaleOutfits>
@@ -589,6 +611,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -602,6 +625,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+			</m_items>		
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -617,7 +641,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_MaleOutfits>
 
 	<m_FemaleOutfits> 
@@ -648,6 +673,7 @@
 			<subItems> <!-- Trainers -->
 				<itemGUID>6fed6e2b-3a72-4bac-aac5-09585984493d</itemGUID>
 			</subItems>
+		</m_items>			
 		<m_items> <!-- Gloves  -->
 			<probability>0.2</probability>
 			<!-- Fingerless glove -->
@@ -661,6 +687,7 @@
 			<subItems> <!-- Surgical glove -->
 				<itemGUID>2dd80ba3-4b0e-469a-98c4-7221891bd71a</itemGUID>
 			</subItems>
+			</m_items>		
 		<m_items> <!-- Watches  -->
 			<probability>0.1</probability>
 			<!-- Classic black -->
@@ -676,7 +703,8 @@
 			<subItems>
 			<!-- Digital red -->
 				<itemGUID>04989b88-b238-4579-9da6-6e66d84e9229</itemGUID>
-			</subItems>						
+			</subItems>
+		</m_items>			
 	</m_FemaleOutfits>
 
 	
