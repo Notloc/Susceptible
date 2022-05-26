@@ -22,6 +22,13 @@ function CheckDrops(zombie)
 			inv:AddItems("Susceptible.GasmaskFilter", 1);
 			end		
 		end
+
+	if outfit == "SusceptiblePoliceGasmask" then
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.GasmaskFilter", 1);
+			end		
+		end
 		
 	if outfit == "SusceptibleHazmat" then
 				local lootchance = SandboxVars.Susceptible.LootChance;
