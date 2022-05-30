@@ -1,4 +1,5 @@
 SusceptibleMaskItems = {
+--- Hazmat Suits ---
 	HazmatSuit =                                          { durability=300 },
 	MysteriousHazmat =                                    { durability=300 },    
 	CEDAHazmatSuit =                                      { durability=300 },    
@@ -16,6 +17,7 @@ SusceptibleMaskItems = {
 	Hat_M17Doff =                                         { durability=300 },
 	Hat_M40Doff =                                         { durability=300 },
 
+--- Gas masks ---
 	Hat_GasMask =                                         { durability=200 },
 	Hat_NBCmask =                                         { durability=200 },
 	Hat_SwatGasMask =                                     { durability=200 },
@@ -46,22 +48,32 @@ SusceptibleMaskItems = {
 	HWhatup =                                             { durability=200 },    
 	HWhatdown =                                           { durability=200 },
 	Mask_HECU  =                                          { durability=200 },    
-	GP5GasMask  =                                         { durability=200 },    
-    
+	GP5GasMask  =                                         { durability=200 },
+ 	Ranger_Advanced_Helmet  =                             { durability=200 },
+	Ranger_Desert_Helmet  =                               { durability=200 },    
+	Ranger_Elite_Helmet  =                                { durability=200 },
+	Ranger_Riot_Helmet  =                                 { durability=200 }, 
+	Ranger_Veteran_Helmet  =                              { durability=200 },
+ 	Ranger_Winter_Helmet  =                               { durability=200 }, 
+  	
+ --- Enclosed Military Helmets ---   
 	Hat_KillaHelmet =                                     { durability=190 },
 	Hat_880_Helmet =                                      { durability=190 },
 	Hat_880_Visor =                                       { durability=190 },
 	Hat_PSGT_Helmet_Camo =                                { durability=190 },
 	Hat_Face_Shield =                                     { durability=190 },
 
+--- Unique Mod gas masks ---
 	NomadMask =                                           { durability=180 },
 	OminousNomadMask =                                    { durability=180 },
 	PrepperMask =                                         { durability=180 },
 	StalkerMask =                                         { durability=180 },
 	RogueMask =                                           { durability=180 },
+	ClericMask =                                          { durability=180 },	
 	Hat_Rebreather =                                      { durability=180 },
 	Mjill =                                               { durability=180 },    
 
+--- Surgical, dust and face masks ---
 	Hat_SurgicalMask_Blue =                               { durability=120 },
 	Hat_SurgicalMask_Green =                              { durability=120 },
 	Hat_DustMask =                                        { durability=120 },
@@ -83,7 +95,8 @@ SusceptibleMaskItems = {
 	Hat_AdidasFaceMask_Black =                            { durability=120 },    
 	Hat_AdidasFaceMask_White =                            { durability=120 },        
 	Hat_WoodlandFaceMask =                                { durability=120 },        
-    
+ 
+--- Basic face covering helmets/headgear --- 
 	Hat_CrashHelmetFULL =                                 { durability=90 },
 	Hat_RiotHelmet =                                      { durability=90 },
 	Hat_MilitaryHelmetRiot =                              { durability=90 },
@@ -111,7 +124,7 @@ SusceptibleMaskItems = {
 	Hat_AuthenticCrashHelmetFULLRacing =                  { durability=90 },
 	Hat_AuthenticCrashHelmetFULLTINT =                    { durability=90 },
 
-	ClothMask =                                           { durability=26 },
+--- Bandanas & cloth masks ---
 	Hat_BandanaMask =                                     { durability=26 },
 	Hat_Balaclava_Swat =                                  { durability=26 },
 	Hat_PoliceBalaclava =                                 { durability=26 },
@@ -130,13 +143,18 @@ SusceptibleMaskItems = {
 	Legion_Bandana_Black_Ohio =                           { durability=26 },
 	Legion_Bandana_Red_Ohio =                             { durability=26 },
 	Legion_Bandana_Blue_Ohio =                            { durability=26 },
+	Hat_Shemagh =                                         { durability=26 },
+	Hat_ShemaghDesert =                                   { durability=26 },
+	Hat_ShemaghWoodland =                                 { durability=26 },
 	Hat_BandanaMaskTINT =                                 { durability=26, quality=1 },
+	ClothMask =                                           { durability=26, quality=1 },
 
+--- Not implemented ---
 	Hat_GasMask_Improvised =                              { durability=24 },
 	HCImprovisedgasmask =                                 { durability=24 },
 	HCImprovisedhazmat =                                  { durability=24 },
     
-    
+--- Novelty masks & hats ---    
 	Hat_TrueEyeCult =                                     { durability=5 },
 	Hat_GhostFace =                                       { durability=5 },
 	Hat_DRLegoHead =                                      { durability=5 },
