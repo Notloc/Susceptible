@@ -37,5 +37,23 @@ module Susceptible
         Icon	=	EmptyMaskBox,
         WorldStaticModel = EmptyMaskBox,
     }
+		item EmptyDustmaskBox
+    {
+		DisplayCategory = Accessory,
+        Weight	=	0.02,
+        Type	=	Normal,
+        DisplayName	=	Empty Box of Dust Masks,
+        Icon	=	EmptyDustmaskBox,
+        WorldStaticModel = EmptyDustmaskBox,
+    }
+		item DustmaskBox
+    {
+		DisplayCategory = Accessory,
+        Weight	=	1.0,
+        Type	=	Normal,
+        DisplayName	=	Box of Dust Masks ,
+        Icon	=	DustmaskBox,
+        WorldStaticModel = DustmaskBox,
+    }
 	
 }

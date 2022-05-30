@@ -69,9 +69,9 @@ SusceptibleMaskItems = {
 	PrepperMask =                                         { durability=180 },
 	StalkerMask =                                         { durability=180 },
 	RogueMask =                                           { durability=180 },
-	ClericMask =                                          { durability=180 },	
+	ClericMask =                                          { durability=180 },
 	Hat_Rebreather =                                      { durability=180 },
-	Mjill =                                               { durability=180 },    
+	Mjill =                                               { durability=180 },
 
 --- Surgical, dust and face masks ---
 	Hat_SurgicalMask_Blue =                               { durability=120 },

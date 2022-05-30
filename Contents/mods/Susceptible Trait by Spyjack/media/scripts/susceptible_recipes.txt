@@ -53,6 +53,23 @@ recipe Put Face Masks in Box
 		Category:Misc,
 		Sound:PutItemInBag,
     }
-	
+recipe Open Box of Dust Masks
+    {
+		destroy DustmaskBox,
+		Result:Hat_DustMask=10,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+		OnCreate:OpenDustmaskBox
+    }
+recipe Put Dust Masks in Box
+    {
+		Hat_DustMask=10,
+		EmptyDustmaskBox,
+		Result:DustmaskBox,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+    }	
 	
 }
