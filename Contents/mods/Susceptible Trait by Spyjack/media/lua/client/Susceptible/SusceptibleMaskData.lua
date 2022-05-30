@@ -52,7 +52,7 @@ SusceptibleMaskItems = {
  	Ranger_Advanced_Helmet  =                             { durability=200 },
 	Ranger_Desert_Helmet  =                               { durability=200 },    
 	Ranger_Elite_Helmet  =                                { durability=200 },
- 	Ranger_Riot_Helmet  =                             	  { durability=200 }, 
+	Ranger_Riot_Helmet  =                                 { durability=200 }, 
 	Ranger_Veteran_Helmet  =                              { durability=200 },
  	Ranger_Winter_Helmet  =                               { durability=200 }, 
   	
@@ -69,7 +69,7 @@ SusceptibleMaskItems = {
 	PrepperMask =                                         { durability=180 },
 	StalkerMask =                                         { durability=180 },
 	RogueMask =                                           { durability=180 },
-	ClericMask =          		  						  { drainCap=180 },	
+	ClericMask =                                          { durability=180 },	
 	Hat_Rebreather =                                      { durability=180 },
 	Mjill =                                               { durability=180 },    
 
@@ -143,11 +143,11 @@ SusceptibleMaskItems = {
 	Legion_Bandana_Black_Ohio =                           { durability=26 },
 	Legion_Bandana_Red_Ohio =                             { durability=26 },
 	Legion_Bandana_Blue_Ohio =                            { durability=26 },
-	Hat_Shemagh =   									  { drainCap=26 },
-	Hat_ShemaghDesert =      							  { drainCap=26 },
-	Hat_ShemaghWoodland =   							  { drainCap=26 },	
+	Hat_Shemagh =                                         { durability=26 },
+	Hat_ShemaghDesert =                                   { durability=26 },
+	Hat_ShemaghWoodland =                                 { durability=26 },
 	Hat_BandanaMaskTINT =                                 { durability=26, quality=1 },
-	ClothMask =         								  { drainCap=26, quality=1 },
+	ClothMask =                                           { durability=26, quality=1 },
 
 --- Not implemented ---
 	Hat_GasMask_Improvised =                              { durability=24 },
