@@ -1,21 +1,48 @@
-local function rollToAddLoot(lootName, inventory)
-	local lootchance = SandboxVars.Susceptible.LootChance;
-	if lootchance >= ZombRand(1, 100) then
-		inventory:AddItems(lootName, 1);
-	end
-end
-
-local function checkDrops(zombie)
+function CheckDrops(zombie)
 	if not zombie:getOutfitName() then return false end
 	local outfit = tostring(zombie:getOutfitName());
 	local inv = zombie:getInventory();
-
 	if outfit == "SusceptibleHazmat" then
-		rollToAddLoot("Susceptible.OxygenTank", inv);
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.OxygenTank", 1);
+			end
+		end
 		
-	elseif outfit == "SusceptibleMilitary" or outfit == "SusceptibleMilitaryNBC" or outfit == "SusceptiblePoliceGasmask" then
-		rollToAddLoot("Susceptible.GasmaskFilter", inv)
+	if outfit == "SusceptibleMilitaryGasmask" then	
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.GasmaskFilter", 1);
+			end
+		end
+		
+	if outfit == "SusceptibleMilitaryNBC" then
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.GasmaskFilter", 1);
+			end		
+		end
+
+	if outfit == "SusceptiblePoliceGasmask" then
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.GasmaskFilter", 1);
+			end		
+		end
+
+	if outfit == "SusceptibleFirefighter" then
+			local lootchance = SandboxVars.Susceptible.LootChance;
+			if lootchance >= ZombRand(1, 100) then
+			inv:AddItems("Susceptible.OxygenTank", 1);
+			end		
+		end		
+		
+	if outfit == "SusceptibleHazmat" then
+				local lootchance = SandboxVars.Susceptible.LootChance;
+				if lootchance >= ZombRand(1, 100) then
+				inv:AddItems("Susceptible.OxygenTank", 1);
+				end	
 	end
 end
 
-Events.OnZombieDead.Add(checkDrops);
+Events.OnZombieDead.Add(CheckDrops);
