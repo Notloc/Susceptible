@@ -1,7 +1,7 @@
 local function rollToAddLoot(lootName, inventory)
 	local lootchance = SandboxVars.Susceptible.LootChance;
 	if lootchance >= ZombRand(1, 100) then
-		inv:AddItems(lootName, 1);
+		inventory:AddItems(lootName, 1);
 	end
 end
 
