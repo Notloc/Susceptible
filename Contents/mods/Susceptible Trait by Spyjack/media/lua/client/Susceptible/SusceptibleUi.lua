@@ -11,7 +11,7 @@ local MASK_BUTTON_X = 11
 
 function SusceptibleUi:render()
 	if self.hasMask then
-		UiUtil.drawOutlinedBar(self, 8, 50, 2, 38, 6, self.maskDelta, {r=0.6,g=1,b=0.6,a=1});
+		UiUtil.drawOutlinedBar(self, 8, 50, 2, 38, 6, self.maskDurability, {r=0.6,g=1,b=0.6,a=1});
         UiUtil.updateOscillation(self.maskButton);
     else
         self.maskButton:setX(MASK_BUTTON_X);
@@ -22,19 +22,19 @@ end
 function SusceptibleUi:onOptionMouseDown(button, x, y)
 end
 
-function SusceptibleUi:updateMaskInfo(item, maskDelta, threatDelta)
-	if threatDelta > 1 then
+function SusceptibleUi:updateMaskInfo(item, maskDurability, threatValue)
+	if threatValue > 1 then
 		self.maskButton:setImage(self.virusTex);
 	elseif item then
 		self.maskButton:setImage(item:getTex());
 	else
 		self.maskButton:setImage(self.maskIconOff);
     end
-	self.maskDelta = maskDelta;
+	self.maskDurability = maskDurability;
 
 	self.hasMask = item ~= nil;
 
-	local col = UiUtil.triLerpColors(threatDelta, GREY, ORANGE, RED);
+	local col = UiUtil.triLerpColors(threatValue, GREY, ORANGE, RED);
 	self.maskBg:setColor(col.r, col.g, col.b);
 end
 
@@ -57,7 +57,7 @@ function SusceptibleUi:new (x, y, chr)
 	o.maskIconOff = getTexture("media/ui/Susceptible/maskoff.png");
 	o.virusTex = getTexture("media/ui/Susceptible/virus.png");
 
-	o.maskDelta = 0.0;
+	o.maskDurability = 0.0;
     o.oscillationTick = 0;
 
     SusceptibleUi.instance = o;
@@ -86,7 +86,7 @@ function SusceptibleUi:initialise()
     self.maskButton:setDisplayBackground(false);
 
     local oscillateCondition = function() 
-            return self.maskDelta <= 0.2; 
+            return self.maskDurability <= 0.2; 
         end;
 
     UiUtil.setupOscillation(self.maskButton, MASK_BUTTON_X, OSCILLATION_DELAY, oscillateCondition);

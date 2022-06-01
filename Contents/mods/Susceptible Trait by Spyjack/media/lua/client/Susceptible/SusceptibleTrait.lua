@@ -264,22 +264,29 @@ end
 
 function SusceptibleMod.reduceThreatWithMask(player, threatLevel)
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
-    if not mask or not SusUtil.canMaskFilter(item) then
+    if not mask or SusUtil.isBroken(item) then
         return threatLevel;
     end
 
-    local playerData = player:getModData();
-    if not playerData.blockedThreats then
-        playerData.blockedThreats = 0;
-    end
-
     local maskDamageRate = SandboxVars.Susceptible.MaskDamageRate / (100 * INFECTION_ROLLS_PER_SECOND);
-    SusceptibleMod.damageMask(item, mask, threatLevel * maskDamageRate);
 
-    if mask.quality then
-        return threatLevel - (mask.quality * SandboxVars.Susceptible.MaskFilteringPower);
-    else
+    if mask.repairType == SusceptibleRepairTypes.OXYGEN then
+        local condition = item:getCondition() / item:getConditionMax() + 0.1;
+        condition = condition * condition;
+        if condition > 1 then
+            condition = 1;
+        end
+
+        local conditionMult = 1.0 / condition;
+        SusceptibleMod.damageMask(item, mask, maskDamageRate * 10 * conditionMult); -- Constant drain rate for oxygen based protection
         return 0;
+    else     
+        SusceptibleMod.damageMask(item, mask, threatLevel * maskDamageRate);
+        if mask.quality then
+            return threatLevel - (mask.quality * SandboxVars.Susceptible.MaskFilteringPower);
+        else
+            return 0;
+        end
     end
 end
 
@@ -296,37 +303,14 @@ function SusceptibleMod.onPlayerGasMaskDrain(player)
     end
 
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
-    if mask and SusUtil.canMaskFilter(item) then
-        local playerData = player:getModData();
-
-        local blockedThreat = playerData.blockedThreats;
-        if not blockedThreat then
-            blockedThreat = 0;
-        end
-
-
+    if mask and not SusUtil.isBroken(item) then
         local damage = 0.05 * (2 - player:getStats():getEndurance());
         SusceptibleMod.damageMask(item, mask, damage);
-
-        playerData.blockedThreats = 0;
     end
-end
-
-function SusceptibleMod.initMaskDurability(mask, itemModData)
-    itemModData.filterDurabilityMax = mask.durability;
-    itemModData.filterDurability = mask.durability;
 end
 
 function SusceptibleMod.damageMask(item, mask, damage)
-    local itemData = item:getModData();
-    if not itemData.filterDurability then
-        SusceptibleMod.initMaskDurability(mask, itemData)
-    end
-
-    itemData.filterDurability = itemData.filterDurability - damage;
-    if itemData.filterDurability < 0 then
-        itemData.filterDurability = 0;
-    end
+    SusUtil.damageDurability(item, damage);
 end
 
 function SusceptibleMod.createMaskUi(player)
@@ -362,24 +346,19 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
         SusceptibleMod.createMaskUi(player);
     end
 
-    if item and SusUtil.canMaskFilter(item) then
+    if item and not SusUtil.isBroken(item) then
         local currentBase = item:getCondition();
         local maxBase = item:getConditionMax();
-        
-        local itemData = item:getModData();
-        if not itemData.filterDurability then
-            SusceptibleMod.initMaskDurability(mask, itemData);
-        end
 
-        local maskDelta = itemData.filterDurability / itemData.filterDurabilityMax;
+        local maskDurability = SusUtil.getNormalizedDurability(item);
 
         local quality = mask.quality
         if not quality then
             quality = 99999;
         end
 
-        local threatDelta = threatLevel / (quality * SandboxVars.Susceptible.MaskFilteringPower);
-        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(item, maskDelta, threatDelta)
+        local threatValue = threatLevel / (quality * SandboxVars.Susceptible.MaskFilteringPower);
+        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(item, maskDurability, threatValue)
     else
         SusceptibleMod.uiByPlayer[player]:updateMaskInfo(nil, 0, threatLevel)
     end

@@ -1,10 +1,10 @@
 local outfitToItemMap = {
-	SusceptibleHazmat: "Susceptible.OxygenTank",
-	SusceptibleFirefighter: "Susceptible.OxygenTank",
+	SusceptibleHazmat = "Susceptible.OxygenTank",
+	SusceptibleFirefighter = "Susceptible.OxygenTank",
 
-	SusceptibleMilitaryGasmask: "Susceptible.GasmaskFilter",
-	SusceptibleMilitaryNBC: "Susceptible.GasmaskFilter",
-	SusceptiblePoliceGasmask: "Susceptible.GasmaskFilter",
+	SusceptibleMilitaryGasmask = "Susceptible.GasmaskFilter",
+	SusceptibleMilitaryNBC = "Susceptible.GasmaskFilter",
+	SusceptiblePoliceGasmask = "Susceptible.GasmaskFilter",
 };
 
 local function rollToAddLoot(item, inventory)

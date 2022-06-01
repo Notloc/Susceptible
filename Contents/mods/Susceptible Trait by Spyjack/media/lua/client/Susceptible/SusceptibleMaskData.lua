@@ -2,12 +2,14 @@ local NONE = "None";
 local CLOTH = "Cloth";
 local FILTER = "Filter";
 local WASH = "Wash";
+local OXYGEN = "Oxygen";
 
 SusceptibleRepairTypes = {
 	NONE = NONE,
 	CLOTH = CLOTH,
 	FILTER = FILTER,
 	WASH = WASH,
+	OXYGEN = OXYGEN,
 	DEFAULT = CLOTH,
 };
 
@@ -16,22 +18,22 @@ SusceptibleRepairTypes = {
 
 SusceptibleMaskItems = {
 --- Hazmat Suits ---
-	HazmatSuit =                                          { durability=600, repairType=NONE },
-	MysteriousHazmat =                                    { durability=600, repairType=NONE },    
-	CEDAHazmatSuit =                                      { durability=600, repairType=NONE },    
-	HazmatSuitCEDANoShoes =                               { durability=600, repairType=NONE },    
-	CEDAHazmatSuitBlack =                                 { durability=600, repairType=NONE },    
-	CEDAHazmatSuitBlackNoShoes =                          { durability=600, repairType=NONE },    
-	CEDAHazmatSuitBlue =                                  { durability=600, repairType=NONE },    
-	CEDAHazmatSuitBlueNoShoes =                           { durability=600, repairType=NONE },    
-	CEDAHazmatSuitRed =                                   { durability=600, repairType=NONE },    
-	CEDAHazmatSuitRedNoShoes =                            { durability=600, repairType=NONE },    
-	NBHHazmatSuit =                                       { durability=600, repairType=NONE },    
-	NBHHazmatSuitNoShoes =                                { durability=600, repairType=NONE },
-	HazmatSuit2 =                                         { durability=600, repairType=NONE },        
-	HazmatSuit2NoShoes =                                  { durability=600, repairType=NONE },
-	Hat_M17Doff =                                         { durability=600, repairType=NONE },
-	Hat_M40Doff =                                         { durability=600, repairType=NONE },
+	HazmatSuit =                                          { durability=600, repairType=OXYGEN },
+	MysteriousHazmat =                                    { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuit =                                      { durability=600, repairType=OXYGEN },    
+	HazmatSuitCEDANoShoes =                               { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitBlack =                                 { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitBlackNoShoes =                          { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitBlue =                                  { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitBlueNoShoes =                           { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitRed =                                   { durability=600, repairType=OXYGEN },    
+	CEDAHazmatSuitRedNoShoes =                            { durability=600, repairType=OXYGEN },    
+	NBHHazmatSuit =                                       { durability=600, repairType=OXYGEN },    
+	NBHHazmatSuitNoShoes =                                { durability=600, repairType=OXYGEN },
+	HazmatSuit2 =                                         { durability=600, repairType=OXYGEN },        
+	HazmatSuit2NoShoes =                                  { durability=600, repairType=OXYGEN },
+	Hat_M17Doff =                                         { durability=600, repairType=OXYGEN },
+	Hat_M40Doff =                                         { durability=600, repairType=OXYGEN },
 
 --- Gas masks ---
 	Hat_GasMask =                                         { durability=400, repairType=FILTER },

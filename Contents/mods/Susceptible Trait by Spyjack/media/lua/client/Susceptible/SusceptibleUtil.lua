@@ -1,90 +1,217 @@
 require "Susceptible/SusceptibleMaskData"
 
+local OXYGEN_TANK_ITEM = "Susceptible.OxygenTank";
+local FILTER_ITEM = "Susceptible.GasmaskFilter";
+
 local SusceptibleUtil = {}
 
-function SusceptibleUtil.hasSusceptibleFilterDurability(item)
+local durabilityItems = {
+	GasmaskFilter = true,
+	OxygenTank = true,
+}
+
+function SusceptibleUtil.hasSusceptibleDurability(item)
 	local itemType = item:getType();
-	return SusceptibleMaskItems[itemType] or itemType == "GasmaskFilter";
+	return SusceptibleMaskItems[itemType] or durabilityItems[itemType];
 end
 
-function SusceptibleUtil.getFilterDelta(item)
-	local delta = 1;
-	local data = item:getModData()
-	if data.filterDurability then
-		delta = data.filterDurability / data.filterDurabilityMax;
+local function initializeModData(item, modData)
+	modData.susceptibleData = {}
+
+	local maxDurability = 1;
+
+	local itemType = item:getType();
+	local maskInfo = SusceptibleMaskItems[itemType]
+	if maskInfo then
+		maxDurability = maskInfo.durability;
 	end
-	if data.filterDelta then
-		delta = data.filterDelta;
+
+    modData.susceptibleData.durabilityMax = maxDurability;
+    modData.susceptibleData.durability = maxDurability;
+
+    modData.susceptibleData.weights = {}
+
+    if maskInfo and maskInfo.repairType == SusceptibleRepairTypes.FILTER then
+	    SusceptibleUtil.setWeightChange(item, "filter", 0.5);
 	end
-	return delta;
 end
 
-function SusceptibleUtil.containsFilter(maskItem)
-	return not maskItem:getModData().removedFilter;
-end
-
-function SusceptibleUtil.createFilterItem()
-	return InventoryItemFactory.CreateItem("Susceptible.GasmaskFilter");
-end
-
-function SusceptibleUtil.canMaskFilter(maskItem)
-	local itemData = maskItem:getModData();
-    return not itemData.filterDurability or itemData.filterDurability > 0;
-end
-
-function SusceptibleUtil.getFilterData(filterItem)
-	local filterModData = filterItem:getModData();
-	if not filterModData.filterDelta then
-		filterModData.filterDelta = 1;
+function SusceptibleUtil.getModData(item)
+	local modData = item:getModData();
+	if not modData.susceptibleData then
+		initializeModData(item, modData);
 	end
-	return filterModData;
+    return modData.susceptibleData;
 end
 
-function SusceptibleUtil.getMaskData(maskItem)
-	local maskModData = maskItem:getModData(); 
-	if not maskModData.filterDurabilityMax then
-		local maskInfo = SusceptibleMaskItems[maskItem:getType()];
-		maskModData.filterDurabilityMax = maskInfo.durability;
-		maskModData.filterDurability = maskInfo.durability;
+
+
+function SusceptibleUtil.damageDurability(item, damage)
+    local data = SusceptibleUtil.getModData(item);
+
+    data.durability = data.durability - damage;
+    if data.durability < 0 then
+        data.durability = 0;
+    end
+
+    SusceptibleUtil.updateWeight(item);
+end
+
+function SusceptibleUtil.getNormalizedDurability(item)
+	local durability = 1;
+	local modData = item:getModData().susceptibleData
+	if modData then
+		durability = modData.durability / modData.durabilityMax;
 	end
-	return maskModData;
+	return durability;
 end
 
-function SusceptibleUtil.insertFilter(mask, filter, player)
-	local maskData =SusceptibleUtil.getMaskData(mask);
-	local filterData = SusceptibleUtil.getFilterData(filter);
-	
+function SusceptibleUtil.isBroken(item)
+	local data = SusceptibleUtil.getModData(item);
+    if data.durabilityMax then
+    	return data.durability <= 0;
+    end
+    return false;
+end
+
+function SusceptibleUtil.getRepairType(item)
+	local maskInfo = SusceptibleMaskItems[item:getType()];
+	if not maskInfo then
+		return nil;
+	elseif not maskInfo.repairType then
+		return SusceptibleRepairTypes.DEFAULT;
+	else
+		return maskInfo.repairType;
+	end
+end
+
+function SusceptibleUtil.insertFilter(maskItem, filterItem, player)
+	local maskData = SusceptibleUtil.getModData(maskItem);
+	if not maskData.removedFilter then
+		return
+	end
+
+	SusceptibleUtil.overwriteDurability(filterItem, maskItem);
+	SusceptibleUtil.setWeightChange(maskItem, "filter", 0.5);
+
 	maskData.removedFilter = false;
-	maskData.filterDurability = filterData.filterDelta * maskData.filterDurabilityMax;
-
-	player:getInventory():DoRemoveItem(filter);
+	player:getInventory():DoRemoveItem(filterItem);
 end
 
-function SusceptibleUtil.removeFilter(mask, player)
-	local maskData = SusceptibleUtil.getMaskData(mask)
+function SusceptibleUtil.removeFilter(maskItem, player)
+	local maskData = SusceptibleUtil.getModData(maskItem)
 	if maskData.removedFilter then
 		return;
 	end
 
-	local outDelta = maskData.filterDurability / maskData.filterDurabilityMax;
-
+	local filterItem = player:getInventory():AddItem(FILTER_ITEM);
+	SusceptibleUtil.overwriteDurability(maskItem, filterItem);
+	SusceptibleUtil.setWeightChange(maskItem, "filter", 0);
+	
 	maskData.removedFilter = true;
-	maskData.filterDurability = 0;
+end
 
-	local filterItem = SusceptibleUtil.createFilterItem();
-	filterItem:getModData().filterDelta = outDelta;
+function SusceptibleUtil.insertOxygen(mask, oxygen, player)
+	local maskData = SusceptibleUtil.getModData(mask);
+	if maskData.hasOxygenTank then
+		return;
+	end
 
-	player:getInventory():addItem(filterItem);
+	SusceptibleUtil.overwriteDurability(oxygen, mask);
+	local weight = SusceptibleUtil.calculateOxygenTankWeight(SusceptibleUtil.getNormalizedDurability(mask));
+	SusceptibleUtil.setWeightChange(mask, "oxygenTank", weight);
+
+	maskData.hasOxygenTank = true;
+	player:getInventory():DoRemoveItem(oxygen);
+end
+
+function SusceptibleUtil.removeOxygen(mask, player)
+	local maskData = SusceptibleUtil.getModData(mask)
+	if not maskData.hasOxygenTank then
+		return;
+	end
+
+	local oxygenItem = player:getInventory():AddItem(OXYGEN_TANK_ITEM);
+
+	SusceptibleUtil.overwriteDurability(mask, oxygenItem);
+	SusceptibleUtil.setWeightChange(mask, "oxygenTank", 0);
+
+	local durability = SusceptibleUtil.getNormalizedDurability(oxygenItem);
+	SusceptibleUtil.setWeightChange(oxygenItem, "oxygenTank", (1-durability) * -3);
+
+	maskData.hasOxygenTank = false;
 end
 
 function SusceptibleUtil.isFilter(item)
 	return item:getType() == "GasmaskFilter";
 end
 
+function SusceptibleUtil.isOxygen(item)
+	return item:getType() == "OxygenTank";
+end
+
 function SusceptibleUtil.findAllFilters(inventory)
 	local filtersOut = ArrayList.new();
 	inventory:getAllEval(SusceptibleUtil.isFilter, filtersOut);
 	return filtersOut;
+end
+
+function SusceptibleUtil.findAllOxygen(inventory)
+	local oxygenOut = ArrayList.new();
+	inventory:getAllEval(SusceptibleUtil.isOxygen, oxygenOut);
+	return oxygenOut;
+end
+
+function SusceptibleUtil.containsFilter(maskItem)
+	local data = maskItem:getModData().susceptibleData;
+	return not data or not data.removedFilter;
+end
+
+function SusceptibleUtil.containsOxygen(maskItem)
+	local data = maskItem:getModData().susceptibleData;
+	return data and data.hasOxygenTank;
+end
+
+function SusceptibleUtil.overwriteDurability(fromItem, toItem)
+	local fromData = SusceptibleUtil.getModData(fromItem)
+	local outPercent = fromData.durability / fromData.durabilityMax;
+	fromData.durability = 0;
+
+	local toData = SusceptibleUtil.getModData(toItem);
+	toData.durability = outPercent * toData.durabilityMax;
+end
+
+function SusceptibleUtil.calculateOxygenTankWeight(durability)
+	local variableWeight = 3;
+	return 2 + (variableWeight * durability);
+end
+
+function SusceptibleUtil.updateWeight(item)
+	local maskInfo = SusceptibleMaskItems[item:getType()];
+	if not maskInfo then
+		return;
+	end
+
+	if maskInfo.repairType == SusceptibleRepairTypes.OXYGEN then
+		local modData = SusceptibleUtil.getModData(item);
+		if modData.hasOxygenTank then
+			local weight = SusceptibleUtil.calculateOxygenTankWeight(SusceptibleUtil.getNormalizedDurability(item))
+			SusceptibleUtil.setWeightChange(item, "oxygenTank", weight);
+		end
+	end
+end
+
+function SusceptibleUtil.setWeightChange(item, key, amount)
+	local data = SusceptibleUtil.getModData(item);
+
+	local change = amount;
+	if data.weights[key] then
+		change = amount - data.weights[key];
+	end
+
+	data.weights[key] = amount;
+	item:setActualWeight(item:getActualWeight() + change);
+	item:setCustomWeight(true);
 end
 
 return SusceptibleUtil;

@@ -8,4 +8,10 @@ UI_EN = {
 	UI_Susceptible_Swap_Filter = "Swap Filter",
 	UI_Susceptible_Insert_Filter = "Insert Filter",
 	UI_Susceptible_Remove_Filter = "Remove Filter",
+
+	UI_Susceptible_Oxygen = "Oxygen",
+	UI_Susceptible_No_Oxygen = "No Oxygen",
+	UI_Susceptible_Swap_Oxygen = "Swap Oxygen",
+	UI_Susceptible_Insert_Oxygen = "Insert Oxygen",
+	UI_Susceptible_Remove_Oxygen = "Remove Oxygen",
 }
