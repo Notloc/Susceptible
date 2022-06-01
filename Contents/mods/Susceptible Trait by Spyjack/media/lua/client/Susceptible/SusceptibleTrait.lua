@@ -72,14 +72,15 @@ function SusceptibleMod.onPlayerUpdate(player)
             --print("Susceptible: INFECTED~!")
             --player:Kill(player);
 
-            local bodyDamage = player:getBodyDamage();
-            for i = 0, bodyDamage:getBodyParts():size() - 1 do
-                local bodyPart = bodyDamage:getBodyParts():get(i)
-                bodyPart:SetInfected(true)
-            end
-            bodyDamage:setInf(true);
+            SusceptibleMod.infectPlayer(player)
+
+            
         end
     end
+end
+
+function SusceptibleMod.infectPlayer(player)
+    player:getBodyDamage():getBodyPart(BodyPartType.Torso_Upper):SetInfected(true);
 end
 
 function SusceptibleMod.tryLuckySave(player, infectionChance)
