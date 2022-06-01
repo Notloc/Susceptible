@@ -1,25 +1,18 @@
 require "Susceptible/SusceptibleMaskData"
 local SusUtil = require "Susceptible/SusceptibleUtil"
+local PatchUtil = require "Susceptible/Patches/PatchUtil"
 
 local fgBar = {r=0.0, g=0.6, b=0.0, a=0.7}
 local fgText = {r=0.6, g=0.8, b=0.5, a=0.6}
 
-ISInventoryPane.drawItemDetails_prepatch_susceptible = ISInventoryPane.drawItemDetails;
-ISInventoryPane.drawItemDetails = function(self, item, y, xoff, yoff, red)
-	self:drawItemDetails_prepatch_susceptible(item, y, xoff, yoff, red);
-
-	if item == nil then
-        return;
-    end
-	
-	if SusUtil.hasSusceptibleFilterDurability(item) then
-		local delta = SusUtil.getFilterDelta(item);
-		local top = self.headerHgt + y * self.itemHgt + yoff;
-		self:drawSuceptibleConditionProgressBar(item, delta, xoff, top, fgText, fgBar)
+local function drawSuceptibleConditionBar(ret, self, item, y, xoff, yoff, red)
+	if not item or not SusUtil.hasSusceptibleFilterDurability(item) then
+		return ret;
 	end
-end
 
-function ISInventoryPane:drawSuceptibleConditionProgressBar(item, fraction, xoff, top, fgText, fgBar)
+	local fraction = SusUtil.getFilterDelta(item);
+	local top = self.headerHgt + y * self.itemHgt + yoff;
+
 	local textWid = getTextManager():MeasureStringX(self.font, item:getName())
 	local xoff2 = 40 + math.max(120, 50 + textWid) + xoff;
 
@@ -41,4 +34,8 @@ function ISInventoryPane:drawSuceptibleConditionProgressBar(item, fraction, xoff
 	else
 		self:drawProgressBar(xoff2, top+(self.itemHgt/2)-1, 100, 2, fraction, fgBar)
 	end
+
+	return ret;
 end
+
+PatchUtil.patchBuiltInMethod(ISInventoryPane, "drawItemDetails", "Susceptible_conditionBar", drawSuceptibleConditionBar);
