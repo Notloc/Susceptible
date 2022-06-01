@@ -183,10 +183,10 @@ SusceptibleMaskItems = {
 	HCImprovisedhazmat =                                  { durability=24 },
     
 --- Novelty masks & hats ---    
-	Hat_Spiffo =                                       	  { durability=5 }
+	Hat_Spiffo =                                       	  { durability=5 },
 	Hat_TrueEyeCult =                                     { durability=5 },
 	Hat_GhostFace =                                       { durability=5 },
 	Hat_DRLegoHead =                                      { durability=5 },
-	Hat_DeathMask =                                       { durability=5 }
+	Hat_DeathMask =                                       { durability=5 },
     
 }

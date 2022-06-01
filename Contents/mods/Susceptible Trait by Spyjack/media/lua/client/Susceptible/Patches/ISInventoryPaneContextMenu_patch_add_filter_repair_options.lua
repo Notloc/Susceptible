@@ -1,5 +1,6 @@
 require "Susceptible/SusceptibleMaskData"
 local SusUtil = require "Susceptible/SusceptibleUtil"
+local PatchUtil = require "Susceptible/Patches/PatchUtil"
 
 local function getRepairType(maskData)
 	if not maskData or not maskData.repairType then
@@ -25,16 +26,9 @@ local function swapOrInsertFilter(mask, filter, player)
 	SusUtil.insertFilter(mask, filter, player);
 end
 
-ISInventoryPaneContextMenu.createMenu_prepatch_susceptible = ISInventoryPaneContextMenu.createMenu;
-ISInventoryPaneContextMenu.createMenu = function(player, isInPlayerInventory, items, x, y, origin)
-	local context = ISInventoryPaneContextMenu.createMenu_prepatch_susceptible(player, isInPlayerInventory, items, x, y, origin);
-	ISInventoryPaneContextMenu.addFilterRepairOptions(context, player, isInPlayerInventory, items, x, y, origin);
-	return context;
-end
-
-ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, isInPlayerInventory, items, x, y, origin)
+local function addRepairOptions(context, player, isInPlayerInventory, items, x, y, origin)
 	if not context or not isInPlayerInventory or #items ~= 1 then
-		return;
+		return context;
 	end
 
 	local item = items[1]
@@ -42,23 +36,23 @@ ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, is
         if #item.items == 2 then
             item = item.items[1];
         else
-        	return
+        	return context
         end
     end
 
 	local maskData = SusceptibleMaskItems[item:getType()];
 	local repairType = getRepairType(maskData);
 	if not maskData or repairType == SusceptibleRepairTypes.NONE then
-		return;
+		return context;
 	end
 
-	if repairType == "SusceptibleRepairTypes.CLOTH" then
+	if repairType == SusceptibleRepairTypes.CLOTH then
 
 		local option = context:addOption(getText("UI_Susceptible_Swap_Filter"))
 		local subMenu = context:getNew(context)
 		context:addSubMenu(option, subMenu)
 
-	elseif repairType ~= SusceptibleRepairTypes.FILTER then
+	elseif repairType == SusceptibleRepairTypes.FILTER then
 		local playerObj = getSpecificPlayer(player)
     	local playerInv = playerObj:getInventory()
 
@@ -85,4 +79,8 @@ ISInventoryPaneContextMenu.addFilterRepairOptions = function(context, player, is
 			context:addOption(getText("UI_Susceptible_Remove_Filter"), item, SusUtil.removeFilter, playerObj);
 		end
 	end
+
+	return context;
 end
+
+PatchUtil.patchBuiltInMethod(ISInventoryPaneContextMenu, "createMenu", "Susceptible_addRepairOptions", addRepairOptions);
