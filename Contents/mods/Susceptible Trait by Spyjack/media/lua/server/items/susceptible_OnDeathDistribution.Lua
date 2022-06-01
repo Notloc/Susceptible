@@ -1,20 +1,26 @@
-local function rollToAddLoot(lootName, inventory)
+local outfitToItemMap = {
+	SusceptibleHazmat: "Susceptible.OxygenTank",
+	SusceptibleFirefighter: "Susceptible.OxygenTank",
+
+	SusceptibleMilitaryGasmask: "Susceptible.GasmaskFilter",
+	SusceptibleMilitaryNBC: "Susceptible.GasmaskFilter",
+	SusceptiblePoliceGasmask: "Susceptible.GasmaskFilter",
+};
+
+local function rollToAddLoot(item, inventory)
 	local lootchance = SandboxVars.Susceptible.LootChance;
 	if lootchance >= ZombRand(1, 100) then
-		inventory:AddItems(lootName, 1);
+		inventory:AddItems(item, 1);
 	end
 end
 
 local function checkDrops(zombie)
-	if not zombie:getOutfitName() then return false end
-	local outfit = tostring(zombie:getOutfitName());
-	local inv = zombie:getInventory();
+	if not zombie:getOutfitName() then return end
 
-	if outfit == "SusceptibleHazmat" then
-		rollToAddLoot("Susceptible.OxygenTank", inv);
-		
-	elseif outfit == "SusceptibleMilitary" or outfit == "SusceptibleMilitaryNBC" or outfit == "SusceptiblePoliceGasmask" then
-		rollToAddLoot("Susceptible.GasmaskFilter", inv)
+	local outfit = tostring(zombie:getOutfitName());
+	local item = outfitToItemMap[outfit];
+	if item then
+		rollToAddLoot(item, zombie:getInventory());
 	end
 end
 
