@@ -1,5 +1,6 @@
 require "Susceptible/SusceptibleMaskData"
 require "Susceptible/SusceptibleUi"
+local SusUtil = require "Susceptible/SusceptibleUtil"
 
 if not SusceptibleMod then
     SusceptibleMod = {
@@ -13,11 +14,6 @@ local INFECTION_ROLLS_PER_SECOND = 10 -- This number should evenly divide 60. No
 
 local maskItems = SusceptibleMaskItems;
 
-function SusceptibleMod.hasEquippedMask(player)
-    local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
-    return mask ~= nil;
-end
-
 function SusceptibleMod.getEquippedMaskItemAndData(player)
     local items = player:getInventory():getItems();
     for i = 0, items:size()-1 do
@@ -25,10 +21,7 @@ function SusceptibleMod.getEquippedMaskItemAndData(player)
         local mask = maskItems[item:getType()];
 
         if mask and player:isEquippedClothing(item) then
-            local itemData = item:getModData();
-            if not itemData.filterDurability or itemData.filterDurability > 0 then
-                return item, mask;
-            end
+            return item, mask;
         end
     end
     return nil, nil;
@@ -271,7 +264,7 @@ end
 
 function SusceptibleMod.reduceThreatWithMask(player, threatLevel)
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
-    if not mask then
+    if not mask or not SusUtil.canMaskFilter(item) then
         return threatLevel;
     end
 
@@ -303,7 +296,7 @@ function SusceptibleMod.onPlayerGasMaskDrain(player)
     end
 
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
-    if mask then
+    if mask and SusUtil.canMaskFilter(item) then
         local playerData = player:getModData();
 
         local blockedThreat = playerData.blockedThreats;
@@ -369,7 +362,7 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
         SusceptibleMod.createMaskUi(player);
     end
 
-    if item then
+    if item and SusUtil.canMaskFilter(item) then
         local currentBase = item:getCondition();
         local maxBase = item:getConditionMax();
         
