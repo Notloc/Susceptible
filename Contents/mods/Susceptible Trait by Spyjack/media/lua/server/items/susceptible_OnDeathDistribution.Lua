@@ -1,48 +1,27 @@
-function CheckDrops(zombie)
-	if not zombie:getOutfitName() then return false end
-	local outfit = tostring(zombie:getOutfitName());
-	local inv = zombie:getInventory();
-	if outfit == "SusceptibleHazmat" then
-			local lootchance = SandboxVars.Susceptible.LootChance;
-			if lootchance >= ZombRand(1, 100) then
-			inv:AddItems("Susceptible.OxygenTank", 1);
-			end
-		end
-		
-	if outfit == "SusceptibleMilitaryGasmask" then	
-			local lootchance = SandboxVars.Susceptible.LootChance;
-			if lootchance >= ZombRand(1, 100) then
-			inv:AddItems("Susceptible.GasmaskFilter", 1);
-			end
-		end
-		
-	if outfit == "SusceptibleMilitaryNBC" then
-			local lootchance = SandboxVars.Susceptible.LootChance;
-			if lootchance >= ZombRand(1, 100) then
-			inv:AddItems("Susceptible.GasmaskFilter", 1);
-			end		
-		end
+local outfitToItemMap = {
+	SusceptibleHazmat: "Susceptible.OxygenTank",
+	SusceptibleFirefighter: "Susceptible.OxygenTank",
 
-	if outfit == "SusceptiblePoliceGasmask" then
-			local lootchance = SandboxVars.Susceptible.LootChance;
-			if lootchance >= ZombRand(1, 100) then
-			inv:AddItems("Susceptible.GasmaskFilter", 1);
-			end		
-		end
+	SusceptibleMilitaryGasmask: "Susceptible.GasmaskFilter",
+	SusceptibleMilitaryNBC: "Susceptible.GasmaskFilter",
+	SusceptiblePoliceGasmask: "Susceptible.GasmaskFilter",
+};
 
-	if outfit == "SusceptibleFirefighter" then
-			local lootchance = SandboxVars.Susceptible.LootChance;
-			if lootchance >= ZombRand(1, 100) then
-			inv:AddItems("Susceptible.OxygenTank", 1);
-			end		
-		end		
-		
-	if outfit == "SusceptibleHazmat" then
-				local lootchance = SandboxVars.Susceptible.LootChance;
-				if lootchance >= ZombRand(1, 100) then
-				inv:AddItems("Susceptible.OxygenTank", 1);
-				end	
+local function rollToAddLoot(item, inventory)
+	local lootchance = SandboxVars.Susceptible.LootChance;
+	if lootchance >= ZombRand(1, 100) then
+		inventory:AddItems(item, 1);
 	end
 end
 
-Events.OnZombieDead.Add(CheckDrops);
+local function checkDrops(zombie)
+	if not zombie:getOutfitName() then return end
+
+	local outfit = tostring(zombie:getOutfitName());
+	local item = outfitToItemMap[outfit];
+	if item then
+		rollToAddLoot(item, zombie:getInventory());
+	end
+end
+
+Events.OnZombieDead.Add(checkDrops);
