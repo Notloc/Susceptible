@@ -21,6 +21,10 @@ local function swapOrInsertOxygen(mask, oxygen, player)
 	SusUtil.insertOxygen(mask, oxygen, player);
 end
 
+local function repairWithClothMask(fullMask, clothMask, player)
+	SusUtil.repairWith(fullMask, clothMask, 1/3, player);
+end
+
 local function addRepairOptions(context, player, isInPlayerInventory, items, x, y, origin)
 	if not context or not isInPlayerInventory or #items ~= 1 then
 		return context;
@@ -35,21 +39,40 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
         end
     end
 
+    local playerObj = getSpecificPlayer(player)
+    local playerInv = playerObj:getInventory()
+
 	local repairType = SusUtil.getRepairType(item);
 	if not repairType or repairType == SusceptibleRepairTypes.NONE then
 		return context;
 	end
 
-	if repairType == SusceptibleRepairTypes.CLOTH then
+	local durability = SusUtil.getNormalizedDurability(item);
 
-		local option = context:addOption(getText("UI_Susceptible_Swap_Filter"))
-		local subMenu = context:getNew(context)
-		context:addSubMenu(option, subMenu)
+	if repairType == SusceptibleRepairTypes.CLOTH and durability < 0.975 then
+
+		local cloths = SusUtil.findAllClothMasks(playerInv);
+		if cloths:size() > 0 then
+			local option = context:addOption(getText("UI_Susceptible_Repair_With"))
+			local subMenu = context:getNew(context)
+			context:addSubMenu(option, subMenu)
+
+			for i=1,cloths:size() do
+				local cloth = cloths:get(i-1);
+				local loss = " ";
+
+				local repairVal = SusUtil.getNormalizedDurability(cloth) * 0.33333;
+				if repairVal > 1 - durability then
+					local lossNum = math.floor((repairVal - (1-durability)) * 100);
+					loss = "   (-"..lossNum.."%)";
+				end
+
+				local repairPercent = math.floor(repairVal * 100.0).."%";
+				subMenu:addOption(cloth:getDisplayName()..":  "..repairPercent..loss, item, repairWithClothMask, cloth, playerObj);
+			end
+		end
 
 	elseif repairType == SusceptibleRepairTypes.FILTER then
-		local playerObj = getSpecificPlayer(player)
-    	local playerInv = playerObj:getInventory()
-
     	local hasFilter = SusUtil.containsFilter(item);
     	local optionText = getText("UI_Susceptible_Swap_Filter");
 		if not hasFilter then
@@ -72,9 +95,6 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 			context:addOption(getText("UI_Susceptible_Remove_Filter"), item, SusUtil.removeFilter, playerObj);
 		end
 	elseif repairType == SusceptibleRepairTypes.OXYGEN then
-		local playerObj = getSpecificPlayer(player)
-    	local playerInv = playerObj:getInventory()
-
     	local hasOxygen = SusUtil.containsOxygen(item);
 		local optionText = getText("UI_Susceptible_Swap_Oxygen");
 		if not hasOxygen then

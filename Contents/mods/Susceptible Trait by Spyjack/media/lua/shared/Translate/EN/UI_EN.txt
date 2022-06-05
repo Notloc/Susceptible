@@ -14,4 +14,6 @@ UI_EN = {
 	UI_Susceptible_Swap_Oxygen = "Swap Oxygen",
 	UI_Susceptible_Insert_Oxygen = "Insert Oxygen",
 	UI_Susceptible_Remove_Oxygen = "Remove Oxygen",
+
+	UI_Susceptible_Repair_With = "Repair using...",
 }
