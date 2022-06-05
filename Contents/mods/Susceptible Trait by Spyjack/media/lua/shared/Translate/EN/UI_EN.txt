@@ -16,4 +16,5 @@ UI_EN = {
 	UI_Susceptible_Remove_Oxygen = "Remove Oxygen",
 
 	UI_Susceptible_Repair_With = "Repair using...",
+	UI_Susceptible_Bleach_Repair = "Clean With Bleach"
 }

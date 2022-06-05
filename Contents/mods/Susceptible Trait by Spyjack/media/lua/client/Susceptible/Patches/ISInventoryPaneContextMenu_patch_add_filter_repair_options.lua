@@ -1,6 +1,8 @@
 local SusUtil = require "Susceptible/SusceptibleUtil"
 local PatchUtil = require "Susceptible/Patches/PatchUtil"
 
+local MAX_BLEACH_USES = 20
+
 local function getConditionPercent(item)
 	local cond = SusUtil.getNormalizedDurability(item);
 	cond = math.floor(cond * 100);
@@ -25,6 +27,19 @@ local function repairWithClothMask(fullMask, clothMask, player)
 	SusUtil.repairWith(fullMask, clothMask, 1/3, player);
 end
 
+local function repairWithBleach(mask, bleach, player)
+	SusUtil.repair(mask, 1);
+
+	local bleachData = bleach:getModData();
+	if bleachData.useCount + 1 >= MAX_BLEACH_USES then
+		bleach:Use();
+	else
+		bleachData.useCount = bleachData.useCount + 1;
+	end
+
+	mask:setCondition(mask:getCondition() - 1);
+end
+
 local function addRepairOptions(context, player, isInPlayerInventory, items, x, y, origin)
 	if not context or not isInPlayerInventory or #items ~= 1 then
 		return context;
@@ -43,7 +58,7 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
     local playerInv = playerObj:getInventory()
 
 	local repairType = SusUtil.getRepairType(item);
-	if not repairType or repairType == SusceptibleRepairTypes.NONE then
+	if not repairType or repairType == SusceptibleRepairTypes.NONE or item:getCondition() <= 0 then
 		return context;
 	end
 
@@ -70,6 +85,27 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 				local repairPercent = math.floor(repairVal * 100.0).."%";
 				subMenu:addOption(cloth:getDisplayName()..":  "..repairPercent..loss, item, repairWithClothMask, cloth, playerObj);
 			end
+		end
+
+	elseif repairType == SusceptibleRepairTypes.WASH and durability < 0.975 then
+		local bleach = SusUtil.findAllBleach(playerInv);
+		if bleach:size() > 0 then
+			local mostUsed = nil;
+			local mostUsedVal = -1;
+			for i=1,bleach:size() do
+				local ble = bleach:get(i-1);
+				local data = ble:getModData();
+				if not data.useCount then
+					data.useCount = 0;
+				end
+
+				if data.useCount > mostUsedVal then
+					mostUsed = ble;
+					mostUsedVal = data.useCount;
+				end
+			end
+
+			context:addOption(getText("UI_Susceptible_Bleach_Repair").."  ("..(MAX_BLEACH_USES - mostUsedVal).."/"..MAX_BLEACH_USES..")", item, repairWithBleach, mostUsed, playerObj);
 		end
 
 	elseif repairType == SusceptibleRepairTypes.FILTER then

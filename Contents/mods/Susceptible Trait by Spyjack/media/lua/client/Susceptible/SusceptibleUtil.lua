@@ -67,6 +67,9 @@ function SusceptibleUtil.getNormalizedDurability(item)
 end
 
 function SusceptibleUtil.isBroken(item)
+	if item:getCondition() <= 0 then
+		return true;
+	end
 	local data = SusceptibleUtil.getModData(item);
     if data.durabilityMax then
     	return data.durability <= 0;
@@ -150,9 +153,13 @@ function SusceptibleUtil.isOxygen(item)
 	return item:getType() == "OxygenTank";
 end
 
+function SusceptibleUtil.isBleach(item)
+	return item:getType() == "Bleach";
+end
+
 function SusceptibleUtil.isClothMask(item)
 	local maskInfo = SusceptibleMaskItems[item:getType()];
-	return maskInfo and maskInfo.repairType == SusceptibleRepairTypes.WASH;
+	return maskInfo and maskInfo.repairType == SusceptibleRepairTypes.WASH and not SusceptibleUtil.isBroken(item);
 end
 
 function SusceptibleUtil.findAllFilters(inventory)
@@ -171,6 +178,19 @@ function SusceptibleUtil.findAllClothMasks(inventory)
 	local masksOut = ArrayList.new();
 	inventory:getAllEval(SusceptibleUtil.isClothMask, masksOut);
 	return masksOut;
+end
+
+function SusceptibleUtil.findAllCleaningSupplies(inventory)
+	local cleanerOut = ArrayList.new();
+	cleanerOut:addAll(inventory:getItemsFromType("Soap2", true))
+    cleanerOut:addAll(inventory:getItemsFromType("CleaningLiquid2", true))
+	return cleanerOut;
+end
+
+function SusceptibleUtil.findAllBleach(inventory)
+	local cleanerOut = ArrayList.new();
+	inventory:getAllEval(SusceptibleUtil.isBleach, cleanerOut);
+	return cleanerOut;
 end
 
 function SusceptibleUtil.containsFilter(maskItem)
@@ -192,7 +212,7 @@ function SusceptibleUtil.overwriteDurability(fromItem, toItem)
 	toData.durability = outPercent * toData.durabilityMax;
 end
 
-function SusceptibleUtil.addDurability(fromItem, toItem, mult)
+function SusceptibleUtil.addDurabilityFrom(fromItem, toItem, mult)
 	local fromData = SusceptibleUtil.getModData(fromItem)
 	local outPercent = mult * fromData.durability / fromData.durabilityMax;
 	fromData.durability = 0;
@@ -205,8 +225,16 @@ function SusceptibleUtil.addDurability(fromItem, toItem, mult)
 end
 
 function SusceptibleUtil.repairWith(itemToRepair, repairItem, repairMult, player)
-	SusceptibleUtil.addDurability(repairItem, itemToRepair, repairMult);
+	SusceptibleUtil.addDurabilityFrom(repairItem, itemToRepair, repairMult);
 	player:getInventory():DoRemoveItem(repairItem);
+end
+
+function SusceptibleUtil.repair(item, repairPercentage)
+	local data = SusceptibleUtil.getModData(item);
+	data.durability = data.durability + (data.durabilityMax * repairPercentage);
+	if data.durability > data.durabilityMax then
+		data.durability = data.durabilityMax;
+	end
 end
 
 function SusceptibleUtil.calculateOxygenTankWeight(durability)

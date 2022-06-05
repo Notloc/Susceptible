@@ -11,6 +11,10 @@ local function drawSuceptibleConditionBar(ret, self, item, y, xoff, yoff, red)
 	end
 
 	local fraction = SusUtil.getNormalizedDurability(item);
+	if item:getCondition() <= 0 then
+		fraction = 0;
+	end
+
 	local top = self.headerHgt + y * self.itemHgt + yoff;
 
 	local textWid = getTextManager():MeasureStringX(self.font, item:getName())
