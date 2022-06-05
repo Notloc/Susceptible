@@ -7,6 +7,13 @@ option Susceptible.EveryoneIsSusceptible
 	translation = Susceptible_EveryoneIsSusceptible,
 }
 
+option Susceptible.InstantDeath
+{
+	type = boolean, default = false,
+	page = Susceptible,
+	translation = Susceptible_InstantDeath,
+}
+
 option Susceptible.BaseInfectionChance
 {
 	type = double, min = 0.0001, max = 0.05, default = 0.0034,

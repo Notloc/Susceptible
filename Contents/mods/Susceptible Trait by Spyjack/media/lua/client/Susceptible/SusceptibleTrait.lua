@@ -69,12 +69,11 @@ function SusceptibleMod.onPlayerUpdate(player)
                 return;
             end
 
-            --print("Susceptible: INFECTED~!")
-            --player:Kill(player);
-
-            SusceptibleMod.infectPlayer(player)
-
-            
+            if SandboxVars.Susceptible.InstantDeath then
+                player:Kill(player);
+            else
+                SusceptibleMod.infectPlayer(player)
+            end
         end
     end
 end

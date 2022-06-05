@@ -1,6 +1,7 @@
 Sandbox_EN = {
 	Sandbox_Susceptible = "Susceptible",
 	Sandbox_Susceptible_EveryoneIsSusceptible = "Everyone is Susceptible",
+	Sandbox_Susceptible_InstantDeath = "Instant Death Infection",
 	Sandbox_Susceptible_BaseInfectionChance = "Base Infection Chance",
 	Sandbox_Susceptible_MaskDamageRate = "Mask Damage Rate",
 	Sandbox_Susceptible_MaskFilteringPower = "Mask Filtering Power",
