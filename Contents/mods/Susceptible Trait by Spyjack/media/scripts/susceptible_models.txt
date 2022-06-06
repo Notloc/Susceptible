@@ -21,8 +21,8 @@ module Base
 	}
 	model EmptyDustmaskBox
 	{
-		mesh = WorldItems/EmptyDustmaskBox,
-		texture = Worlditems/EmptyDustmaskBox,
+		mesh = WorldItems/DustmaskBox,
+		texture = Worlditems/DustmaskBox,
 		scale = 0.01,
 	}			
 	model GasmaskFilter
