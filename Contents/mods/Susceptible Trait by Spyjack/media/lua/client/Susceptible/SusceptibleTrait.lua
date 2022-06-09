@@ -277,7 +277,7 @@ function SusceptibleMod.reduceThreatWithMask(player, threatLevel)
         end
 
         local conditionMult = 1.0 / condition;
-        SusceptibleMod.damageMask(item, mask, maskDamageRate * 10 * conditionMult); -- Constant drain rate for oxygen based protection
+        SusceptibleMod.damageMask(item, mask, maskDamageRate * 3 * conditionMult); -- Constant drain rate for oxygen based protection
         return 0;
     else     
         SusceptibleMod.damageMask(item, mask, threatLevel * maskDamageRate);
@@ -345,21 +345,23 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
         SusceptibleMod.createMaskUi(player);
     end
 
-    if item and not SusUtil.isBroken(item) then
-        local currentBase = item:getCondition();
-        local maxBase = item:getConditionMax();
+    local quality = 99999;
+    if mask and mask.quality then
+        quality = mask.quality;
+    end
 
-        local maskDurability = SusUtil.getNormalizedDurability(item);
+    local isBroken = not item or SusUtil.isBroken(item);
+    local threatValue = threatLevel;
+    if not isBroken then
+        threatValue = threatLevel / (quality * SandboxVars.Susceptible.MaskFilteringPower);
+    end
+      
+    SusceptibleMod.uiByPlayer[player]:updateMaskImage(item, mask, threatValue, isBroken)
 
-        local quality = mask.quality
-        if not quality then
-            quality = 99999;
-        end
-
-        local threatValue = threatLevel / (quality * SandboxVars.Susceptible.MaskFilteringPower);
-        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(item, maskDurability, threatValue)
+    if item and not isBroken then
+        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(true, SusUtil.getNormalizedDurability(item), threatValue)
     else
-        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(nil, 0, threatLevel)
+        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(false, 0, threatLevel)
     end
 end
 

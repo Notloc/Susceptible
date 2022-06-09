@@ -1,4 +1,5 @@
 local UiUtil = require 'Susceptible/UiUtil'
+local SusUtil = require 'Susceptible/SusceptibleUtil'
 
 SusceptibleUi = ISPanel:derive("SusceptibleUi");
 
@@ -22,18 +23,29 @@ end
 function SusceptibleUi:onOptionMouseDown(button, x, y)
 end
 
-function SusceptibleUi:updateMaskInfo(item, maskDurability, threatValue)
+function SusceptibleUi:updateMaskImage(item, maskInfo, threatValue, isBroken)
 	if threatValue > 1 then
 		self.maskButton:setImage(self.virusTex);
 	elseif item then
-		self.maskButton:setImage(item:getTex());
+		if maskInfo.repairType == SusceptibleRepairTypes.OXYGEN then
+			if isBroken then
+				self.maskButton:setImage(self.noOxygenIcon);
+			else
+				self.maskButton:setImage(self.oxygenIcon);
+			end
+		elseif isBroken then
+			self.maskButton:setImage(self.maskIconOff);
+		else
+			self.maskButton:setImage(item:getTex());
+		end
 	else
 		self.maskButton:setImage(self.maskIconOff);
     end
+end
+
+function SusceptibleUi:updateMaskInfo(hasMask, maskDurability, threatValue)
 	self.maskDurability = maskDurability;
-
-	self.hasMask = item ~= nil;
-
+	self.hasMask = hasMask;
 	local col = UiUtil.triLerpColors(threatValue, GREY, ORANGE, RED);
 	self.maskBg:setColor(col.r, col.g, col.b);
 end
@@ -55,6 +67,8 @@ function SusceptibleUi:new (x, y, chr)
 
 	o.backgroundTex = getTexture("media/ui/HandMain2_Off.png");
 	o.maskIconOff = getTexture("media/ui/Susceptible/maskoff.png");
+	o.oxygenIcon = getTexture("media/ui/Susceptible/tank.png");
+	o.noOxygenIcon = getTexture("media/ui/Susceptible/notank.png");
 	o.virusTex = getTexture("media/ui/Susceptible/virus.png");
 
 	o.maskDurability = 0.0;

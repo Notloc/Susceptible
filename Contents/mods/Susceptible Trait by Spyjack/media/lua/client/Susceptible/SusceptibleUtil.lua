@@ -75,7 +75,14 @@ function SusceptibleUtil.isBroken(item)
 	if item:getCondition() <= 0 then
 		return true;
 	end
+
 	local data = SusceptibleUtil.getModData(item);
+
+	local maskInfo = SusceptibleMaskItems[item:getType()];
+	if not maskInfo or maskInfo.repairType == SusceptibleRepairTypes.OXYGEN and not data.hasOxygenTank then 
+		return true;
+	end
+	
     if data.durabilityMax then
     	return data.durability <= 0;
     end
