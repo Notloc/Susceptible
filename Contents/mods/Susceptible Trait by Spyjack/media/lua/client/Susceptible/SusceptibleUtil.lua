@@ -29,6 +29,11 @@ local function initializeModData(item, modData)
     modData.susceptibleData.durabilityMax = maxDurability;
     modData.susceptibleData.durability = maxDurability;
 
+    -- Import old mask durability if available
+    if modData.filterDurability then
+    	modData.susceptibleData.durability = modData.filterDurability;
+    end
+
     modData.susceptibleData.weights = {}
 
     if maskInfo and maskInfo.repairType == SusceptibleRepairTypes.FILTER then
