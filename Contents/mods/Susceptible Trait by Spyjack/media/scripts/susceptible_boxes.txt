@@ -44,7 +44,7 @@ module Susceptible
         Type	=	Normal,
         DisplayName	=	Empty Box of Dust Masks,
         Icon	=	EmptyDustmaskBox,
-        WorldStaticModel = EmptyDustmaskBox,
+        WorldStaticModel = DustmaskBox,
     }
 		item DustmaskBox
     {
