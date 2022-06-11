@@ -21,7 +21,7 @@ local function generatePatch(object, methodName)
 
 	patch.original = object[methodName];
     object[methodName] = function(...)
-    	executePatchedCode(patch, ...);
+    	return executePatchedCode(patch, ...);
 	end
 end
 

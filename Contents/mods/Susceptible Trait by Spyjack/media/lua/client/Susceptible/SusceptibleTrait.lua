@@ -16,15 +16,24 @@ local maskItems = SusceptibleMaskItems;
 
 function SusceptibleMod.getEquippedMaskItemAndData(player)
     local items = player:getInventory():getItems();
+    local foundItem = nil;
+    local foundMask = nil;
+
     for i = 0, items:size()-1 do
         local item = items:get(i);
         local mask = maskItems[item:getType()];
 
         if mask and player:isEquippedClothing(item) then
-            return item, mask;
+            if SusUtil.isBroken(item) then
+                foundItem = item;
+                foundMask = mask;
+            else
+                return item, mask;
+            end
         end
     end
-    return nil, nil;
+
+    return foundItem, foundMask;
 end
 
 function SusceptibleMod.shouldPlayerUpdate(player, playerData) 
