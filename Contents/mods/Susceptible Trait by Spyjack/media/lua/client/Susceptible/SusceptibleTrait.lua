@@ -328,10 +328,21 @@ function SusceptibleMod.createMaskUi(player)
 
     local x = getPlayerScreenLeft(player:getPlayerNum());
     local y = getPlayerScreenTop(player:getPlayerNum());
-    local ui = SusceptibleUi:new(x + 60, y + 10)
+    local offsetX, offsetY = SusUtil.loadUiOffsets();
+
+    local ui = SusceptibleUi:new(x + offsetX, y + offsetY, player:getPlayerNum())
     ui:initialise();
     ui:addToUIManager();
     SusceptibleMod.uiByPlayer[player] = ui;
+end
+
+function SusceptibleMod.applyUiOffsets(offsetX, offsetY)
+    for p,ui in pairs(SusceptibleMod.uiByPlayer) do
+        local x = getPlayerScreenLeft(p:getPlayerNum());
+        local y = getPlayerScreenTop(p:getPlayerNum());
+        ui:setX(x + offsetX);
+        ui:setY(y + offsetY);
+    end
 end
 
 function SusceptibleMod.removeUi(player)

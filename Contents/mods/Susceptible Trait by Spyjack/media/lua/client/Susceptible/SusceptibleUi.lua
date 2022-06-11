@@ -11,6 +11,10 @@ local OSCILLATION_DELAY = 12;
 local MASK_BUTTON_X = 11
 
 function SusceptibleUi:render()
+	if self:isMouseOver() then
+		self:drawRect(self:getWidth() - 12, 0, 12, 12, 0.5, 1, 1, 1);
+	end
+
 	if self.hasMask then
 		UiUtil.drawOutlinedBar(self, 8, 50, 2, 38, 6, self.maskDurability, {r=0.6,g=1,b=0.6,a=1});
         UiUtil.updateOscillation(self.maskButton);
@@ -21,6 +25,14 @@ function SusceptibleUi:render()
 end
 
 function SusceptibleUi:onOptionMouseDown(button, x, y)
+end
+
+function SusceptibleUi:onMouseUp(x,y)
+	if self.moving and self.playerNum == 0 then
+		SusUtil.saveUiOffsets(self.x, self.y);
+		SusceptibleMod.applyUiOffsets(SusUtil.loadUiOffsets());
+	end
+	ISPanel.onMouseUp(self, x, y);
 end
 
 function SusceptibleUi:updateMaskImage(item, maskInfo, threatValue, isBroken)
@@ -50,7 +62,7 @@ function SusceptibleUi:updateMaskInfo(hasMask, maskDurability, threatValue)
 	self.maskBg:setColor(col.r, col.g, col.b);
 end
 
-function SusceptibleUi:new (x, y, chr)
+function SusceptibleUi:new (x, y, playerNum)
 	local o = {}
 	o = ISPanel:new(x, y, 64, 64);
 	setmetatable(o, self)
@@ -60,11 +72,11 @@ function SusceptibleUi:new (x, y, chr)
     o.borderColor = {r=0.4, g=0.4, b=0.4, a=0};
     o.backgroundColor = {r=0, g=0, b=0, a=0};
     o.anchorLeft = true;
-    o.chr = chr;
+    o.playerNum = playerNum;
 	o.anchorRight = false;
 	o.anchorTop = true;
 	o.anchorBottom = false;
-
+	o.moveWithMouse = true;
 	o.backgroundTex = getTexture("media/ui/HandMain2_Off.png");
 	o.maskIconOff = getTexture("media/ui/Susceptible/maskoff.png");
 	o.oxygenIcon = getTexture("media/ui/Susceptible/tank.png");

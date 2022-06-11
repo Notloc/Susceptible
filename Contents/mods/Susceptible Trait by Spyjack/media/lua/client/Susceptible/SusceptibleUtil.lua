@@ -282,4 +282,21 @@ function SusceptibleUtil.setWeightChange(item, key, amount)
 	item:setCustomWeight(true);
 end
 
+function SusceptibleUtil.saveUiOffsets(x, y)
+	local data = ModData.getOrCreate("SusceptibleUiOffsets");
+	data.susceptibleUiX = x;
+	data.susceptibleUiY = y;
+end
+
+function SusceptibleUtil.loadUiOffsets()
+	local data = ModData.getOrCreate("SusceptibleUiOffsets");
+    local x = data.susceptibleUiX;
+    local y = data.susceptibleUiY;
+    if not x or not y then
+        x = 60;
+        y = 10;
+    end
+    return x, y;
+end
+
 return SusceptibleUtil;
