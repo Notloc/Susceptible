@@ -94,7 +94,7 @@ SusceptibleMaskItems = {
 	Hat_HalfMaskRespirator_White =                        { durability=250 },
 	Hat_HalfMaskRespiratorII_Black =                      { durability=250 },		
 	Hat_HalfMaskRespiratorII_White =                      { durability=250 },
-	Hat_TR2TacticalRespirator =                    		  { durability=250 },	
+	Hat_TR2TacticalRespirator =                    		  { durability=400, repairType=FILTER },	
 
 --- Surgical, dust and face masks ---
 	Hat_SurgicalMask_Blue =                               { durability=120, repairType=WASH },
