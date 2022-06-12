@@ -16,7 +16,7 @@ option Susceptible.InstantDeath
 
 option Susceptible.BaseInfectionChance
 {
-	type = double, min = 0.0001, max = 0.05, default = 0.0034,
+	type = double, min = 0.000001, max = 0.05, default = 0.0034,
 	page = Susceptible,
 	translation = Susceptible_BaseInfectionChance,
 }
