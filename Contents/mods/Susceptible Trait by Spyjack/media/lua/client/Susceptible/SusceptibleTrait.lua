@@ -113,6 +113,15 @@ function SusceptibleMod.calculateThreat(player)
     local isOutside = player:isOutside();
     local threatLevel = 0;
 
+    local multiplier = 1;
+    if player:getVehicle() then
+        multiplier = SusceptibleMod.calculateVehicleInfectionMultiplier(player, player:getVehicle());
+    end
+    
+    if multiplier == 0 then
+        return 0;
+    end
+
     local zeds = getCell():getZombieList();
     if zeds:size() > 0 then
         for i = 0, zeds:size() - 1 do
@@ -128,7 +137,7 @@ function SusceptibleMod.calculateThreat(player)
         end
     end
 
-    return threatLevel;
+    return threatLevel * multiplier;
 end
 
 function SusceptibleMod.calculateInfectionChance(player, threatLevel)
@@ -138,10 +147,6 @@ function SusceptibleMod.calculateInfectionChance(player, threatLevel)
     end
     if player:HasTrait("Resilient") then
         infectionChance = infectionChance * 0.6666;
-    end
-
-    if player:getVehicle() then
-        infectionChance = infectionChance * SusceptibleMod.calculateVehicleInfectionMultiplier(player, player:getVehicle());
     end
 
     if threatLevel < 1 then
