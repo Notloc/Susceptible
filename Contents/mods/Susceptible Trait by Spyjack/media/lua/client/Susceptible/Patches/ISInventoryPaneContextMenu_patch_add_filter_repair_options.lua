@@ -1,5 +1,6 @@
 local SusUtil = require "Susceptible/SusceptibleUtil"
 local PatchUtil = require "Susceptible/Patches/PatchUtil"
+local DelayedAction = require "Susceptible/Actions/DelayedCodeExecutionTimedAction"
 
 local MAX_BLEACH_USES = 20
 
@@ -9,22 +10,66 @@ local function getConditionPercent(item)
 	return cond.."%";
 end
 
-local function swapOrInsertFilter(mask, filter, player)
+local function createDelayedAction(player, func)
+	return DelayedAction:new(player, func, 120);
+end
+
+local animateHead = function(action)
+	action:setActionAnim("WearClothing");
+	action:setAnimVariable("WearClothingLocation", "Face")
+end
+
+local animateBody = function(action)
+	action:setActionAnim("WearClothing");
+	action:setAnimVariable("WearClothingLocation", "Waist")
+end
+
+local animateHands = function(action)
+	action:setActionAnim("EquipItem");
+end
+
+local function addRemoveFilter(mask, filter, player)
 	if SusUtil.containsFilter(mask) then
 		SusUtil.removeFilter(mask, player);
 	end
-	SusUtil.insertFilter(mask, filter, player);
+	if filter then
+		SusUtil.insertFilter(mask, filter, player);
+	end
 end
 
-local function swapOrInsertOxygen(mask, oxygen, player)
+local function addRemoveFilterDelayed(mask, filter, player)
+	local delayedAction = DelayedAction:new(player, function(action) addRemoveFilter(mask, filter, player) end, 120);
+	delayedAction:setOnStart(animateHead);
+	ISTimedActionQueue.add(delayedAction);
+end
+
+local function addRemoveOxygen(mask, oxygen, player)
 	if SusUtil.containsOxygen(mask) then
 		SusUtil.removeOxygen(mask, player);
 	end
-	SusUtil.insertOxygen(mask, oxygen, player);
+	if oxygen then
+		SusUtil.insertOxygen(mask, oxygen, player);
+	end
+end
+
+local function addRemoveOxygenDelayed(mask, oxygen, player)
+	local delayedAction = DelayedAction:new(player, function(action) addRemoveOxygen(mask, oxygen, player) end, 120);
+	delayedAction:setOnStart(animateBody);
+	ISTimedActionQueue.add(delayedAction);
 end
 
 local function repairWithClothMask(fullMask, clothMask, player)
 	SusUtil.repairWith(fullMask, clothMask, 1/3, player);
+end
+
+local function repairWithClothMaskDelayed(mask, clothMask, player)
+	local delayedAction = DelayedAction:new(player, function(action) repairWithClothMask(mask, clothMask, player) end, 120);
+	if mask:isEquipped() then
+		delayedAction:setOnStart(animateHead);
+	else
+		delayedAction:setOnStart(animateHands);
+	end
+	ISTimedActionQueue.add(delayedAction);
 end
 
 local function repairWithBleach(mask, bleach, player)
@@ -38,7 +83,28 @@ local function repairWithBleach(mask, bleach, player)
 	end
 
 	mask:setCondition(mask:getCondition() - 1);
+
+	if mask:isEquipped() then
+		local body = player:getBodyDamage();
+		local poison = body:getPoisonLevel();
+		body:setPoisonLevel(poison + 25);
+	end
 end
+
+local function repairWithBleachDelayed(mask, bleach, player)
+	local delayedAction = DelayedAction:new(player, function(action) repairWithBleach(mask, bleach, player) end, 120);
+	if mask:isEquipped() then
+		delayedAction:setOnStart(animateHead);
+	else
+		delayedAction:setOnStart(animateHands);
+	end
+	ISTimedActionQueue.add(delayedAction);
+end
+
+
+
+
+
 
 local function addRepairOptions(context, player, isInPlayerInventory, items, x, y, origin)
 	if not context or not isInPlayerInventory or #items ~= 1 then
@@ -83,7 +149,7 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 				end
 
 				local repairPercent = math.floor(repairVal * 100.0).."%";
-				subMenu:addOption(cloth:getDisplayName()..":  "..repairPercent..loss, item, repairWithClothMask, cloth, playerObj);
+				subMenu:addOption(cloth:getDisplayName()..":  "..repairPercent..loss, item, repairWithClothMaskDelayed, cloth, playerObj);
 			end
 		end
 
@@ -105,7 +171,7 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 				end
 			end
 
-			context:addOption(getText("UI_Susceptible_Bleach_Repair").."  ("..(MAX_BLEACH_USES - mostUsedVal).."/"..MAX_BLEACH_USES..")", item, repairWithBleach, mostUsed, playerObj);
+			context:addOption(getText("UI_Susceptible_Bleach_Repair").."  ("..(MAX_BLEACH_USES - mostUsedVal).."/"..MAX_BLEACH_USES..")", item, repairWithBleachDelayed, mostUsed, playerObj);
 		end
 
 	elseif repairType == SusceptibleRepairTypes.FILTER then
@@ -123,12 +189,12 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 
 			for i=1,filters:size() do
 				local filter = filters:get(i-1);
-				subMenu:addOption(getText("UI_Susceptible_Filter").." - "..getConditionPercent(filter), item, swapOrInsertFilter, filter, playerObj);
+				subMenu:addOption(getText("UI_Susceptible_Filter").." - "..getConditionPercent(filter), item, addRemoveFilterDelayed, filter, playerObj);
 			end
 		end
 
 		if hasFilter then
-			context:addOption(getText("UI_Susceptible_Remove_Filter"), item, SusUtil.removeFilter, playerObj);
+			context:addOption(getText("UI_Susceptible_Remove_Filter"), item, addRemoveFilterDelayed, nil, playerObj);
 		end
 	elseif repairType == SusceptibleRepairTypes.OXYGEN then
     	local hasOxygen = SusUtil.containsOxygen(item);
@@ -145,12 +211,12 @@ local function addRepairOptions(context, player, isInPlayerInventory, items, x, 
 
 			for i=1,oxygenTanks:size() do
 				local tank = oxygenTanks:get(i-1);
-				subMenu:addOption(getText("UI_Susceptible_Oxygen").." - "..getConditionPercent(tank), item, swapOrInsertOxygen, tank, playerObj);
+				subMenu:addOption(getText("UI_Susceptible_Oxygen").." - "..getConditionPercent(tank), item, addRemoveOxygenDelayed, tank, playerObj);
 			end
 		end
 
 		if hasOxygen then
-			context:addOption(getText("UI_Susceptible_Remove_Oxygen"), item, SusUtil.removeOxygen, playerObj);
+			context:addOption(getText("UI_Susceptible_Remove_Oxygen"), item, addRemoveOxygenDelayed, nil, playerObj);
 		end
 	end
 
