@@ -86,8 +86,7 @@ local function repairWithBleach(mask, bleach, player)
 
 	if mask:isEquipped() then
 		local body = player:getBodyDamage();
-		local poison = body:getPoisonLevel();
-		body:setPoisonLevel(poison + 25);
+		body:setPoisonLevel(math.min(body:getPoisonLevel() + 25, 35));
 	end
 end
 
