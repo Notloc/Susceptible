@@ -282,20 +282,48 @@ function SusceptibleUtil.setWeightChange(item, key, amount)
 	item:setCustomWeight(true);
 end
 
+function SusceptibleUtil.getSplitScreenType()
+	local players = IsoPlayer.getPlayers();
+	if players:get(1) ~= nil and players:get(2) ~= nil then
+		return "CROSS";
+	elseif players:get(1) ~= nil then
+		return "VERTICAL";
+	else
+		return "NONE";
+	end
+end
+
 function SusceptibleUtil.saveUiOffsets(x, y)
+	local splitScreenType = SusceptibleUtil.getSplitScreenType();
+	if splitScreenType == "CROSS" or splitScreenType == "VERTICAL" then
+		x = x * 2.0;
+	end
+	if splitScreenType == "CROSS" then
+		y = y * 2.0;
+	end
+
 	local data = ModData.getOrCreate("SusceptibleUiOffsets");
 	data.susceptibleUiX = x;
 	data.susceptibleUiY = y;
 end
 
 function SusceptibleUtil.loadUiOffsets()
+	local BASE_UI_SIZE = 64;
+
 	local data = ModData.getOrCreate("SusceptibleUiOffsets");
     local x = data.susceptibleUiX;
     local y = data.susceptibleUiY;
     if not x or not y then
-        x = 60;
-        y = 10;
+    	x = 60;
+    	y = 10;
     end
+
+    local width = getCore():getScreenWidth();
+    local height = getCore():getScreenHeight();
+
+    if x + BASE_UI_SIZE > width then x = width - BASE_UI_SIZE end
+    if y + BASE_UI_SIZE > height then y = height - BASE_UI_SIZE end
+
     return x, y;
 end
 

@@ -331,17 +331,29 @@ function SusceptibleMod.createMaskUi(player)
         return;
     end
 
-    local x = getPlayerScreenLeft(player:getPlayerNum());
-    local y = getPlayerScreenTop(player:getPlayerNum());
-    local offsetX, offsetY = SusUtil.loadUiOffsets();
-
-    local ui = SusceptibleUi:new(x + offsetX, y + offsetY, player:getPlayerNum())
+    local ui = SusceptibleUi:new(0, 0, player:getPlayerNum())
     ui:initialise();
     ui:addToUIManager();
     SusceptibleMod.uiByPlayer[player] = ui;
+
+    SusceptibleMod.applyUiOffsets();
 end
 
-function SusceptibleMod.applyUiOffsets(offsetX, offsetY)
+function SusceptibleMod.reloadUiPosition()
+    SusceptibleMod.applyUiOffsets()
+end
+
+function SusceptibleMod.applyUiOffsets()
+    local offsetX, offsetY = SusUtil.loadUiOffsets()
+
+    local splitScreenType = SusUtil.getSplitScreenType();
+    if splitScreenType == "CROSS" or splitScreenType == "VERTICAL" then
+        offsetX = (offsetX / 2.0);
+    end
+    if splitScreenType == "CROSS" then
+        offsetY = (offsetY / 2.0);
+    end
+
     for p,ui in pairs(SusceptibleMod.uiByPlayer) do
         local x = getPlayerScreenLeft(p:getPlayerNum());
         local y = getPlayerScreenTop(p:getPlayerNum());
@@ -397,3 +409,6 @@ end
 Events.OnPlayerUpdate.Add(SusceptibleMod.onPlayerUpdate);
 Events.EveryTenMinutes.Add(SusceptibleMod.onGasMaskDrain);
 Events.OnPlayerDeath.Add(SusceptibleMod.removeUi);
+
+Events.OnResolutionChange.Add(SusceptibleMod.reloadUiPosition);
+Events.OnCreatePlayer.Add(SusceptibleMod.reloadUiPosition);

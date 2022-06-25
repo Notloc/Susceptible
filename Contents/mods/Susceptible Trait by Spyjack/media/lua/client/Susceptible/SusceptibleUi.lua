@@ -30,7 +30,7 @@ end
 function SusceptibleUi:onMouseUp(x,y)
 	if self.moving and self.playerNum == 0 then
 		SusUtil.saveUiOffsets(self.x, self.y);
-		SusceptibleMod.applyUiOffsets(SusUtil.loadUiOffsets());
+		SusceptibleMod.applyUiOffsets();
 	end
 	ISPanel.onMouseUp(self, x, y);
 end
