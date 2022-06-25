@@ -206,7 +206,11 @@ function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
             if windowPart then
                 local window = windowPart:getWindow();
                 if window and (window:isOpen() or window:isDestroyed()) then
-                    return 0.8 / math.abs(speed);
+                    if speed == 0 then
+                        return 0.8
+                    else
+                        return 0.8 / math.abs(speed);
+                    end
                 end
             end
         end
