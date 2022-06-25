@@ -180,7 +180,7 @@ local WINDOW_IDS = {
 
 function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
     local speed = vehicle:getCurrentSpeedKmHour() / 16;
-    if math.abs(speed) < 1 then
+    if speed ~= 0 and math.abs(speed) < 1 then
         speed = speed/math.abs(speed); -- sets speed to 1, but preserves sign
     end
 
