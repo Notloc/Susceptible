@@ -12,7 +12,7 @@ local durabilityItems = {
 
 function SusceptibleUtil.hasSusceptibleDurability(item)
 	local itemType = item:getType();
-	return SusceptibleMaskItems[itemType] or durabilityItems[itemType];
+	return SusceptibleMaskItems:getMaskData(item) or durabilityItems[itemType];
 end
 
 local function initializeModData(item, modData)
@@ -21,7 +21,7 @@ local function initializeModData(item, modData)
 	local maxDurability = 1;
 
 	local itemType = item:getType();
-	local maskInfo = SusceptibleMaskItems[itemType]
+	local maskInfo = SusceptibleMaskItems:getMaskData(item)
 	if maskInfo then
 		maxDurability = maskInfo.durability;
 	end
@@ -78,7 +78,7 @@ function SusceptibleUtil.isBroken(item)
 
 	local data = SusceptibleUtil.getModData(item);
 
-	local maskInfo = SusceptibleMaskItems[item:getType()];
+	local maskInfo = SusceptibleMaskItems:getMaskData(item);
 	if not maskInfo or maskInfo.repairType == SusceptibleRepairTypes.OXYGEN and not data.hasOxygenTank then 
 		return true;
 	end
@@ -90,7 +90,7 @@ function SusceptibleUtil.isBroken(item)
 end
 
 function SusceptibleUtil.getRepairType(item)
-	local maskInfo = SusceptibleMaskItems[item:getType()];
+	local maskInfo = SusceptibleMaskItems:getMaskData(item);
 	if not maskInfo then
 		return nil;
 	elseif not maskInfo.repairType then
@@ -170,7 +170,7 @@ function SusceptibleUtil.isBleach(item)
 end
 
 function SusceptibleUtil.isClothMask(item)
-	local maskInfo = SusceptibleMaskItems[item:getType()];
+	local maskInfo = SusceptibleMaskItems:getMaskData(item);
 	return maskInfo and maskInfo.repairType == SusceptibleRepairTypes.WASH and not SusceptibleUtil.isBroken(item);
 end
 
@@ -255,7 +255,7 @@ function SusceptibleUtil.calculateOxygenTankWeight(durability)
 end
 
 function SusceptibleUtil.updateWeight(item)
-	local maskInfo = SusceptibleMaskItems[item:getType()];
+	local maskInfo = SusceptibleMaskItems:getMaskData(item);
 	if not maskInfo then
 		return;
 	end

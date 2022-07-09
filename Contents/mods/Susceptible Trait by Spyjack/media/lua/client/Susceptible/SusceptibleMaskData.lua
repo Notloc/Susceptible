@@ -178,7 +178,7 @@ SusceptibleMaskItems = {
 	Hat_ShemaghWoodland =                                 { durability=26, repairType=WASH },
 	FaceMask			=                                 { durability=26, repairType=WASH },
 	Hat_BandanaMaskTINT =                                 { durability=26, repairType=WASH, quality=1 },
-	ClothMask =                                           { durability=26, repairType=WASH, quality=1 },
+	["Susceptible.ClothMask"] =                           { durability=26, repairType=WASH, quality=1 },
 
 --- Not implemented ---
 	Hat_GasMask_Improvised =                              { durability=24 },
@@ -193,3 +193,10 @@ SusceptibleMaskItems = {
 	Hat_DeathMask =                                       { durability=5 },
     
 }
+
+function SusceptibleMaskItems.getMaskData(self, item)
+	local itemType = item:getType();
+	local modId = item:getModID();
+	local fullItemId = modId.."."..itemType
+	return self[fullItemId] or self[itemType];
+end
