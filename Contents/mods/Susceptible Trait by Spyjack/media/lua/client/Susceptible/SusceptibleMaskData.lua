@@ -120,12 +120,6 @@ SusceptibleMaskItems = {
 	Sphere08HelmetDuty  =                                 { durability=400, repairType=FILTER }, 
 	Sphere08HelmetFreedom  =                              { durability=400, repairType=FILTER }, 
 	Sphere08HelmetMonolith  =                             { durability=400, repairType=FILTER }, 
-	Sphere08GlassMilitary  =                              { durability=400, repairType=FILTER }, 
-	Sphere08GlassCS  =                              	  { durability=400, repairType=FILTER }, 
-	Sphere08GlassDuty  =                             	  { durability=400, repairType=FILTER }, 
-	Sphere08GlassFreedom  =                               { durability=400, repairType=FILTER }, 
-	Sphere08GlassMonolith  =                              { durability=400, repairType=FILTER }, 
-	Sphere08GlassMercs  =                                 { durability=400, repairType=FILTER }, 
 	Sphere08MaskMilitary  =                               { durability=400, repairType=FILTER }, 
 	Sphere08MaskCS  =                            	      { durability=400, repairType=FILTER }, 
 	Sphere08MaskDuty  =                             	  { durability=400, repairType=FILTER }, 
@@ -143,6 +137,7 @@ SusceptibleMaskItems = {
 	ExohelmMonolith  =                           	      { durability=400, repairType=FILTER }, 
 	ExohelmEcologists  =                         	      { durability=400, repairType=FILTER }, 
 	ExohelmLoner  =                               		  { durability=400, repairType=FILTER }, 
+	SteelHelmMask  =                               		  { durability=400, repairType=FILTER }, 
   	
  --- Enclosed Military Helmets ---   
 	Hat_KillaHelmet =                                     { durability=350, repairType=CLOTH },
@@ -223,7 +218,6 @@ SusceptibleMaskItems = {
 	Hat_AuthenticCrashHelmetFULLDecalSimple =             { durability=90 },
 	Hat_AuthenticCrashHelmetFULLRacing =                  { durability=90 },
 	Hat_AuthenticCrashHelmetFULLTINT =                    { durability=90 },
-	SteelHelmMask  =                              		  { durability=90 },
 
 --- Bandanas & cloth masks ---
 	Hat_BandanaMask =                                     { durability=26, repairType=WASH },
