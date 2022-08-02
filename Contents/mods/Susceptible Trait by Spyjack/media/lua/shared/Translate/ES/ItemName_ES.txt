@@ -1,12 +1,12 @@
 ItemName_ES = {
 
 	ItemName_Susceptible.ClothMask = "Mascarilla de tela",
-	ItemName_Susceptible.GasmaskFilter = "Filtro de M√°scara antig√°s",
-	ItemName_Susceptible.OxygenTank = "Tanque de ox√≠geno",
-	ItemName_Susceptible.MaskBox_Blue = "Caja de Mascarilla m√©dica(Azul)",
-	ItemName_Susceptible.MaskBox_Green = "Caja de Mascarilla m√©dica(Verde)",
-	ItemName_Susceptible.EmptyMaskBox_Blue = "Caja Vac√≠a de Mascarilla m√©dica(Azul)",
-	ItemName_Susceptible.EmptyMaskBox_Green = "Caja Vac√≠a de Mascarilla m√©dica(Verde)",
-	ItemName_Susceptible.EmptyDustmaskBox = "Caja Vac√≠a de Mascarilla antipolvo",
+	ItemName_Susceptible.GasmaskFilter = "Filtro de M·scara antig·s",
+	ItemName_Susceptible.OxygenTank = "Tanque de oxÌgeno",
+	ItemName_Susceptible.MaskBox_Blue = "Caja de Mascarilla mÈdica(Azul)",
+	ItemName_Susceptible.MaskBox_Green = "Caja de Mascarilla mÈdica(Verde)",
+	ItemName_Susceptible.EmptyMaskBox_Blue = "Caja VacÌa de Mascarilla mÈdica(Azul)",
+	ItemName_Susceptible.EmptyMaskBox_Green = "Caja VacÌa de Mascarilla mÈdica(Verde)",
+	ItemName_Susceptible.EmptyDustmaskBox = "Caja VacÌa de Mascarilla antipolvo",
 	ItemName_Susceptible.DustmaskBox = "Caja de Mascarilla antipolvo",
 }
