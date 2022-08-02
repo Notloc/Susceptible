@@ -1,7 +1,10 @@
-Recipe_ES = {
-	Recipe_Create_Cloth_Mask = "Crear Mascarilla de Tela",
-	Recipe_Open_Box_of_Face_Masks = "Caja Abierta de Mascarillas",
-	Recipe_Put_Face_Masks_in_Box = "Poner Mascarillas en Caja",
-	Recipe_Open_Box_of_Dust_Masks = "Caja Abierta de M?scaras Antipolvo",
-	Recipe_Put_Dust_Masks_in_Box = "Ponga M?scaras Contra el Polvo en la Caja",
+Recipes_ES = {
+
+    Recipe_Create_Cloth_Mask = "Crear Mascarilla de tela",
+	Recipe_Open_Box_of_Face_Masks = "Abrir Caja de Mascarilla médica",
+	Recipe_Put_Face_Masks_in_Box = "Colocar Mascarilla médica en caja",
+	Recipe_Open_Box_of_Face_Masks = "Abrir Caja de Mascarilla médica",
+	Recipe_Put_Face_Masks_in_Box = "Colocar Mascarilla médica en caja",
+	Recipe_Open_Box_of_Dust_Masks = "Abrir Caja de Mascarilla antipolvo",
+	Recipe_Put_Dust_Masks_in_Box = "Colocar Mascarilla antipolvo en caja",
 }

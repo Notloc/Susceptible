@@ -1,4 +1,4 @@
-Sandbox_EN = {
+Sandbox_ES = {
 	Sandbox_Susceptible = "Susceptible",
 	Sandbox_Susceptible_EveryoneIsSusceptible = "Todos son Susceptibles",
 	Sandbox_Susceptible_InstantDeath = "Infección de muerte instantánea",

@@ -1,6 +1,6 @@
 ItemName_ES = {
 
-	ItemName_Susceptible.ClothMask = "Mascarilla de tela",
+    ItemName_Susceptible.ClothMask = "Mascarilla de tela",
 	ItemName_Susceptible.GasmaskFilter = "Filtro de Máscara antigás",
 	ItemName_Susceptible.OxygenTank = "Tanque de oxígeno",
 	ItemName_Susceptible.MaskBox_Blue = "Caja de Mascarilla médica(Azul)",
