@@ -1,10 +1,10 @@
 Sandbox_RU = {
-	Sandbox_Susceptible = "Г‚Г®Г±ГЇГ°ГЁГЁГ¬Г·ГЁГўГ»Г©",
-	Sandbox_Susceptible_EveryoneIsSusceptible = "Г‚Г±ГҐ ГўГ®Г±ГЇГ°ГЁГЁГ¬Г·ГЁГўГ»",
-	Sandbox_Susceptible_InstantDeath = "ГЊГЈГ­Г®ГўГҐГ­Г­Г Гї Г±Г¬ГҐГ°ГІГҐГ«ГјГ­Г Гї ГЁГ­ГґГҐГЄГ¶ГЁГї",
-	Sandbox_Susceptible_BaseInfectionChance = "ГЃГ Г§Г®ГўГ»Г© ГёГ Г­Г± Г§Г Г°Г Г¦ГҐГ­ГЁГї",
-	Sandbox_Susceptible_MaskDamageRate = "Г‘ГЄГ®Г°Г®Г±ГІГј ГЁГ§Г­Г®Г±Г  Г¬Г Г±ГЄГЁ",
-	Sandbox_Susceptible_MaskFilteringPower = "Г‘ГЁГ«Г  ГґГЁГ«ГјГІГ°Г Г¶ГЁГЁ Г¬Г Г±ГЄГЁ",
-	Sandbox_Susceptible_SusceptibleSpawnChance = "ГГ Г­Г± ГЇГ®ГїГўГ«ГҐГ­ГЁГї Г§Г®Г¬ГЎГЁ Гў Г¬Г Г±ГЄГҐ",
-	Sandbox_Susceptible_SusceptibleLootChance =  "ГГ Г­Г± Г­Г Г©ГІГЁ Г¬Г Г±ГЄГЁ Гі Г§Г®Г¬ГЎГЁ Гў Г¬Г Г±ГЄГ Гµ",
+	Sandbox_Susceptible = "Восприимчивый",
+	Sandbox_Susceptible_EveryoneIsSusceptible = "Все восприимчивы",
+	Sandbox_Susceptible_InstantDeath = "Мгновенная смертельная инфекция",
+	Sandbox_Susceptible_BaseInfectionChance = "Базовый шанс заражения",
+	Sandbox_Susceptible_MaskDamageRate = "Скорость износа маски",
+	Sandbox_Susceptible_MaskFilteringPower = "Сила фильтрации маски",
+	Sandbox_Susceptible_SusceptibleSpawnChance = "Шанс появления зомби в маске",
+	Sandbox_Susceptible_SusceptibleLootChance =  "Шанс найти маски у зомби в масках",
 }
