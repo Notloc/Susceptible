@@ -146,7 +146,7 @@ SusceptibleMaskItems = {
 	Hat_PSGT_Helmet_Camo =                                { durability=350, repairType=CLOTH },
 	Hat_Face_Shield =                                     { durability=350, repairType=CLOTH },
 
---- Unique Mod gas masks ---
+--- Unique Mod masks ---
 	NomadMask =                                           { durability=250, repairType=FILTER },
 	OminousNomadMask =                                    { durability=250, repairType=FILTER },
 	PrepperMask =                                         { durability=250, repairType=FILTER },
@@ -160,7 +160,9 @@ SusceptibleMaskItems = {
 	Hat_HalfMaskRespiratorII_Black =                      { durability=250, repairType=FILTER },		
 	Hat_HalfMaskRespiratorII_White =                      { durability=250, repairType=FILTER },
 	Hat_TR2TacticalRespirator =                    		  { durability=400, repairType=FILTER },	
-
+	CMWHelmet =                  					      { durability=120, repairType=CLOTH  },
+	CMWOfficerHelmet =                  			      { durability=120, repairType=CLOTH  },
+	
 --- Surgical, dust and face masks ---
 	Hat_SurgicalMask_Blue =                               { durability=120, repairType=WASH },
 	Hat_SurgicalMask_Green =                              { durability=120, repairType=WASH },
