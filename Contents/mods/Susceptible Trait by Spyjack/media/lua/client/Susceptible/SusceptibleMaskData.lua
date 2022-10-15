@@ -152,6 +152,7 @@ SusceptibleMaskItems = {
 	PrepperMask =                                         { durability=250, repairType=FILTER },
 	StalkerMask =                                         { durability=250, repairType=FILTER },
 	HeadhunterGasmask  =                                  { durability=250, repairType=FILTER },
+	DeadlyHeadhunterGasmask =                             { durability=250, repairType=FILTER },
 	RogueMask =                                           { durability=250, repairType=FILTER },
 	ClericMask =                                          { durability=250, repairType=FILTER },
 	Hat_Rebreather =                                      { durability=250, repairType=FILTER },
