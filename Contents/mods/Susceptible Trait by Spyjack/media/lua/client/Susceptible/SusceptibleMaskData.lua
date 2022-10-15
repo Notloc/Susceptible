@@ -151,6 +151,7 @@ SusceptibleMaskItems = {
 	OminousNomadMask =                                    { durability=250, repairType=FILTER },
 	PrepperMask =                                         { durability=250, repairType=FILTER },
 	StalkerMask =                                         { durability=250, repairType=FILTER },
+	HeadhunterGasmask  =                                  { durability=250, repairType=FILTER },
 	RogueMask =                                           { durability=250, repairType=FILTER },
 	ClericMask =                                          { durability=250, repairType=FILTER },
 	Hat_Rebreather =                                      { durability=250, repairType=FILTER },
@@ -162,6 +163,7 @@ SusceptibleMaskItems = {
 	Hat_TR2TacticalRespirator =                    		  { durability=400, repairType=FILTER },	
 	CMWHelmet =                  					      { durability=120, repairType=CLOTH  },
 	CMWOfficerHelmet =                  			      { durability=120, repairType=CLOTH  },
+	slyyHat_PlagueDocMask =                  			  { durability=120, repairType=CLOTH  },
 	
 --- Surgical, dust and face masks ---
 	Hat_SurgicalMask_Blue =                               { durability=120, repairType=WASH },
