@@ -161,6 +161,7 @@ SusceptibleMaskItems = {
 	Hat_HalfMaskRespirator_White =                        { durability=250, repairType=FILTER },
 	Hat_HalfMaskRespiratorII_Black =                      { durability=250, repairType=FILTER },		
 	Hat_HalfMaskRespiratorII_White =                      { durability=250, repairType=FILTER },
+	chiGasMask =                  					      { durability=250, repairType=FILTER },	
 	Hat_TR2TacticalRespirator =                    		  { durability=400, repairType=FILTER },	
 	CMWHelmet =                  					      { durability=120, repairType=CLOTH  },
 	CMWOfficerHelmet =                  			      { durability=120, repairType=CLOTH  },
