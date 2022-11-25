@@ -58,9 +58,9 @@ function SusceptibleMod.onPlayerUpdate(player)
     end
     
     local infectionRoll = ZombRandFloat(0.0, 1.0);
-    local threatLevel = SusceptibleMod.calculateThreat(player, infectionDistance);
+    local threatLevel, paranoiaLevel = SusceptibleMod.calculateThreat(player, infectionDistance);
 
-    SusceptibleMod.updateMaskInfoDisplay(player, threatLevel);
+    SusceptibleMod.updateMaskInfoDisplay(player, threatLevel + paranoiaLevel);
     SusceptibleMod.threatByPlayer[player] = threatLevel;
 
     local activeThreatLevel = SusceptibleMod.reduceThreatWithMask(player, threatLevel);
@@ -112,7 +112,9 @@ end
 function SusceptibleMod.calculateThreat(player)
     local infectionDistance = SusceptibleMod.calculateInfectionDistance(player);
     local isOutside = player:isOutside();
+
     local threatLevel = 0;
+    local paranoiaLevel = 0;
 
     local multiplier = 1;
     if player:getVehicle() then
@@ -128,17 +130,21 @@ function SusceptibleMod.calculateThreat(player)
         for i = 0, zeds:size() - 1 do
             local zombie = zeds:get(i);
             local distance = player:DistTo(zombie);
-            if distance <= infectionDistance and SusceptibleMod.zombieIsValid(player, zombie, distance, isOutside) then
-                if distance < 1 then
-                    threatLevel = threatLevel + 2;
-                else
-                    threatLevel = threatLevel + (2 / (0.75 + distance * 0.25));
+            if distance <= infectionDistance then
+                if zombie:isUseless() then
+                    paranoiaLevel = paranoiaLevel + 2
+                elseif SusceptibleMod.zombieIsValid(player, zombie, distance, isOutside) then
+                    if distance < 1 then
+                        threatLevel = threatLevel + 2;
+                    else
+                        threatLevel = threatLevel + (2 / (0.75 + distance * 0.25));
+                    end
                 end
             end
         end
     end
 
-    return threatLevel * multiplier;
+    return threatLevel * multiplier, paranoiaLevel * multiplier;
 end
 
 function SusceptibleMod.calculateInfectionChance(player, threatLevel)
@@ -231,7 +237,7 @@ function SusceptibleMod.zombieIsValid(player, zombie, distance, playerIsOutside)
         return false;
     end
 
-    -- Out out of sight, out of mind
+    -- Out of sight, out of mind
     local canSee = zombie:CanSee(player) or player:CanSee(zombie);
     if not canSee then
         return false;
@@ -242,7 +248,7 @@ function SusceptibleMod.zombieIsValid(player, zombie, distance, playerIsOutside)
         return true;
     end
 
-    -- Dumb pathfind straight at the zombie
+    -- Dumb pathfind straight at the player
     local cell = getCell();
     local zombieSqr = zombie:getSquare();
     local playerSqr = player:getSquare();
