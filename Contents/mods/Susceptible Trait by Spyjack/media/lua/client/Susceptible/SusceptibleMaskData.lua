@@ -138,7 +138,15 @@ SusceptibleMaskItems = {
 	ExohelmEcologists  =                         	      { durability=400, repairType=FILTER }, 
 	ExohelmLoner  =                               		  { durability=400, repairType=FILTER }, 
 	SteelHelmMask  =                               		  { durability=400, repairType=FILTER }, 
-  	
+	SpaceMarine_Helmet  =                                 { durability=400, repairType=FILTER }, 	
+ 	SpaceMarine_Helmet_BlackTemplar  =                    { durability=400, repairType=FILTER }, 	
+ 	fhqODSTHelm  =                  					  { durability=400, repairType=FILTER }, 	
+ 	CRMHelmetGas  =               					      { durability=400, repairType=FILTER }, 		
+ 	FullHelmet_01-Black  =               				  { durability=400, repairType=FILTER }, 		
+ 	FullHelmet_01-Desert  =               				  { durability=400, repairType=FILTER }, 		
+ 	FullHelmet_01-Green  =               				  { durability=400, repairType=FILTER }, 		
+ 	FullHelmet_01-White  =               				  { durability=400, repairType=FILTER }, 			
+	
  --- Enclosed Military Helmets ---   
 	Hat_KillaHelmet =                                     { durability=350, repairType=CLOTH },
 	Hat_880_Helmet =                                      { durability=350, repairType=CLOTH },
@@ -224,6 +232,7 @@ SusceptibleMaskItems = {
 	Hat_AuthenticCrashHelmetFULLDecalSimple =             { durability=90 },
 	Hat_AuthenticCrashHelmetFULLRacing =                  { durability=90 },
 	Hat_AuthenticCrashHelmetFULLTINT =                    { durability=90 },
+	CRMShieldHelmet =                        	          { durability=90 },	
 
 --- Bandanas & cloth masks ---
 	Hat_BandanaMask =                                     { durability=26, repairType=WASH },
