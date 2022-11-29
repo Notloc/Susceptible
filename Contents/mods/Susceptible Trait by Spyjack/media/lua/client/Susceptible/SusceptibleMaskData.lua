@@ -142,10 +142,10 @@ SusceptibleMaskItems = {
  	SpaceMarine_Helmet_BlackTemplar  =                    { durability=400, repairType=FILTER }, 	
  	fhqODSTHelm  =                  					  { durability=400, repairType=FILTER }, 	
  	CRMHelmetGas  =               					      { durability=400, repairType=FILTER }, 		
- 	FullHelmet_01-Black  =               				  { durability=400, repairType=FILTER }, 		
- 	FullHelmet_01-Desert  =               				  { durability=400, repairType=FILTER }, 		
- 	FullHelmet_01-Green  =               				  { durability=400, repairType=FILTER }, 		
- 	FullHelmet_01-White  =               				  { durability=400, repairType=FILTER }, 			
+ 	["KPAP.FullHelmet_01-Black"]  =               	      { durability=400, repairType=FILTER }, 		
+ 	["KPAP.FullHelmet_01-Desert"]  =               		  { durability=400, repairType=FILTER }, 		
+ 	["KPAP.FullHelmet_01-Green"]  =               		  { durability=400, repairType=FILTER }, 		
+ 	["KPAP.FullHelmet_01-White"]  =               		  { durability=400, repairType=FILTER }, 			
 	
  --- Enclosed Military Helmets ---   
 	Hat_KillaHelmet =                                     { durability=350, repairType=CLOTH },
