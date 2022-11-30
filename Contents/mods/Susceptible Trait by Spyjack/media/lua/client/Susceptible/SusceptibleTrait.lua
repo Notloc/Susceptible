@@ -122,7 +122,7 @@ function SusceptibleMod.calculateThreat(player)
     end
     
     if multiplier == 0 then
-        return 0;
+        return 0, 0;
     end
 
     local zeds = getCell():getZombieList();
