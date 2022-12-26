@@ -54,6 +54,7 @@ SusceptibleMaskItems = {
 --- Gas masks ---
 	Hat_GasMask =                                         { durability=400, repairType=FILTER },
 	Hat_NBCmask =                                         { durability=400, repairType=FILTER },
+	Hat_GasMaskInsurgent =                                { durability=400, repairType=FILTER },	
 	Hat_SwatGasMask =                                     { durability=400, repairType=FILTER },
 	Hat_FM53 =                                            { durability=400, repairType=FILTER },
 	Hat_M17 =                                             { durability=400, repairType=FILTER },
