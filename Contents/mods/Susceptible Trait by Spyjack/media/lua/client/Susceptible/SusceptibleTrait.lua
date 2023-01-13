@@ -11,7 +11,6 @@ end
 
 local BASE_INFECTION_DISTANCE = 9;
 local INFECTION_ROLLS_PER_SECOND = 10 -- This number should evenly divide 60. Not a hard requirement, but nicer.
-
 local maskItems = SusceptibleMaskItems;
 
 function SusceptibleMod.getEquippedMaskItemAndData(player)
@@ -301,11 +300,12 @@ function SusceptibleMod.reduceThreatWithMask(player, threatLevel)
             condition = 1;
         end
 
-        local conditionMult = 1.0 / condition;
-        SusceptibleMod.damageMask(item, mask, maskDamageRate * 3 * conditionMult); -- Constant drain rate for oxygen based protection
+        local conditionMult = 1.0 / condition; -- You're leaking :)
+        SusceptibleMod.damageMask(item, mask, maskDamageRate * 2.75 * conditionMult); -- Constant drain rate for oxygen based protection
         return 0;
-    else     
-        SusceptibleMod.damageMask(item, mask, threatLevel * maskDamageRate);
+    else
+        local damage = (threatLevel^0.65) * maskDamageRate * 2;
+        SusceptibleMod.damageMask(item, mask, damage);
         if mask.quality then
             return threatLevel - (mask.quality * SandboxVars.Susceptible.MaskFilteringPower);
         else
@@ -328,7 +328,7 @@ function SusceptibleMod.onPlayerGasMaskDrain(player)
 
     local item, mask = SusceptibleMod.getEquippedMaskItemAndData(player);
     if mask and not SusUtil.isBroken(item) then
-        local damage = 0.05 * (2 - player:getStats():getEndurance());
+        local damage = 0.04 * (2 - player:getStats():getEndurance());
         SusceptibleMod.damageMask(item, mask, damage);
     end
 end

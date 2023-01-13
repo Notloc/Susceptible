@@ -4,6 +4,7 @@ local FILTER = "Filter";
 local WASH = "Wash";
 local OXYGEN = "Oxygen";
 
+-- Lol, why did I need this again?
 SusceptibleRepairTypes = {
 	NONE = NONE,
 	CLOTH = CLOTH,

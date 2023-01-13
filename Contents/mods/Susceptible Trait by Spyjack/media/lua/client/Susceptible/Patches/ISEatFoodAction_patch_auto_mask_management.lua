@@ -1,11 +1,9 @@
 require "TimedActions/ISEatFoodAction"
 require "Susceptible/SusceptibleTrait"
 
-
 ISEatFoodAction.start_prepatch_susceptible = ISEatFoodAction.start;
 
-
-ISEatFoodAction.start = function(self)
+local startEatAction = function(self)
 	if SusceptibleMod.isPlayerSusceptible(self.character) then
 		local threat = SusceptibleMod.threatByPlayer[self.character];
 		if threat and threat > 0 then
@@ -30,3 +28,12 @@ ISEatFoodAction.autoManageMask = function(self, mask)
 	ISTimedActionQueue.add(ISEatFoodAction:new(self.character, self.item, self.percentage));
 	ISTimedActionQueue.add(ISWearClothing:new(self.character, mask, 50));
 end
+
+local function patchEatFunction()
+	ISEatFoodAction.start_prepatch_susceptible = ISEatFoodAction.start;
+	ISEatFoodAction.start = startEatAction
+end
+
+-- Delay until the world is loading so we get to go first in the execution order vs other mods
+-- Important since we plan on fully cancelling the action
+Events.OnInitWorld.Add(patchEatFunction)
