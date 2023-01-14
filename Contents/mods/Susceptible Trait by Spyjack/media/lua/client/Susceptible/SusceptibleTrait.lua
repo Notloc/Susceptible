@@ -17,6 +17,7 @@ function SusceptibleMod.getEquippedMaskItemAndData(player)
     local items = player:getInventory():getItems();
     local foundItem = nil;
     local foundMask = nil;
+    local priorityItemID = SusUtil.getPriorityMaskID(player);
 
     for i = 0, items:size()-1 do
         local item = items:get(i);
@@ -24,16 +25,38 @@ function SusceptibleMod.getEquippedMaskItemAndData(player)
             local mask = maskItems:getMaskData(item);
             if mask then
                 if SusUtil.isBroken(item) then
-                    foundItem = item;
-                    foundMask = mask;
+                    if not foundItem then
+                        foundItem = item;
+                        foundMask = mask;
+                    end
                 else
-                    return item, mask;
+                    if item:getID() == priorityItemID then
+                        return item, mask;
+                    else
+                        foundItem = item;
+                        foundMask = mask;
+                    end
                 end
             end
         end
     end
 
     return foundItem, foundMask;
+end
+
+function SusceptibleMod.getAllMaskItems(player)
+    local items = player:getInventory():getItems();
+    local foundItems = {};
+
+    for i = 0, items:size()-1 do
+        local item = items:get(i);
+        local mask = maskItems:getMaskData(item);
+        if mask then
+            table.insert(foundItems, item);
+        end
+    end
+
+    return foundItems;
 end
 
 function SusceptibleMod.shouldPlayerUpdate(player, playerData) 

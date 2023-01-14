@@ -41,7 +41,7 @@ local function initializeModData(item, modData)
 	end
 end
 
-function SusceptibleUtil.getModData(item)
+function SusceptibleUtil.getItemModData(item)
 	local modData = item:getModData();
 	if not modData.susceptibleData then
 		initializeModData(item, modData);
@@ -52,7 +52,7 @@ end
 
 
 function SusceptibleUtil.damageDurability(item, damage)
-    local data = SusceptibleUtil.getModData(item);
+    local data = SusceptibleUtil.getItemModData(item);
 
     data.durability = data.durability - damage;
     if data.durability < 0 then
@@ -76,7 +76,7 @@ function SusceptibleUtil.isBroken(item)
 		return true;
 	end
 
-	local data = SusceptibleUtil.getModData(item);
+	local data = SusceptibleUtil.getItemModData(item);
 
 	local maskInfo = SusceptibleMaskItems:getMaskData(item);
 	if not maskInfo or maskInfo.repairType == SusceptibleRepairTypes.OXYGEN and not data.hasOxygenTank then 
@@ -101,7 +101,7 @@ function SusceptibleUtil.getRepairType(item)
 end
 
 function SusceptibleUtil.insertFilter(maskItem, filterItem, player)
-	local maskData = SusceptibleUtil.getModData(maskItem);
+	local maskData = SusceptibleUtil.getItemModData(maskItem);
 	if not maskData.removedFilter then
 		return
 	end
@@ -114,7 +114,7 @@ function SusceptibleUtil.insertFilter(maskItem, filterItem, player)
 end
 
 function SusceptibleUtil.removeFilter(maskItem, player)
-	local maskData = SusceptibleUtil.getModData(maskItem)
+	local maskData = SusceptibleUtil.getItemModData(maskItem)
 	if maskData.removedFilter then
 		return;
 	end
@@ -127,7 +127,7 @@ function SusceptibleUtil.removeFilter(maskItem, player)
 end
 
 function SusceptibleUtil.insertOxygen(mask, oxygen, player)
-	local maskData = SusceptibleUtil.getModData(mask);
+	local maskData = SusceptibleUtil.getItemModData(mask);
 	if maskData.hasOxygenTank then
 		return;
 	end
@@ -141,7 +141,7 @@ function SusceptibleUtil.insertOxygen(mask, oxygen, player)
 end
 
 function SusceptibleUtil.removeOxygen(mask, player)
-	local maskData = SusceptibleUtil.getModData(mask)
+	local maskData = SusceptibleUtil.getItemModData(mask)
 	if not maskData.hasOxygenTank then
 		return;
 	end
@@ -216,20 +216,20 @@ function SusceptibleUtil.containsOxygen(maskItem)
 end
 
 function SusceptibleUtil.overwriteDurability(fromItem, toItem)
-	local fromData = SusceptibleUtil.getModData(fromItem)
+	local fromData = SusceptibleUtil.getItemModData(fromItem)
 	local outPercent = fromData.durability / fromData.durabilityMax;
 	fromData.durability = 0;
 
-	local toData = SusceptibleUtil.getModData(toItem);
+	local toData = SusceptibleUtil.getItemModData(toItem);
 	toData.durability = outPercent * toData.durabilityMax;
 end
 
 function SusceptibleUtil.addDurabilityFrom(fromItem, toItem, mult)
-	local fromData = SusceptibleUtil.getModData(fromItem)
+	local fromData = SusceptibleUtil.getItemModData(fromItem)
 	local outPercent = mult * fromData.durability / fromData.durabilityMax;
 	fromData.durability = 0;
 
-	local toData = SusceptibleUtil.getModData(toItem);
+	local toData = SusceptibleUtil.getItemModData(toItem);
 	toData.durability = (outPercent * toData.durabilityMax) + toData.durability;
 	if toData.durability > toData.durabilityMax then
 		toData.durability = toData.durabilityMax;
@@ -242,7 +242,7 @@ function SusceptibleUtil.repairWith(itemToRepair, repairItem, repairMult, player
 end
 
 function SusceptibleUtil.repair(item, repairPercentage)
-	local data = SusceptibleUtil.getModData(item);
+	local data = SusceptibleUtil.getItemModData(item);
 	data.durability = data.durability + (data.durabilityMax * repairPercentage);
 	if data.durability > data.durabilityMax then
 		data.durability = data.durabilityMax;
@@ -261,7 +261,7 @@ function SusceptibleUtil.updateWeight(item)
 	end
 
 	if maskInfo.repairType == SusceptibleRepairTypes.OXYGEN then
-		local modData = SusceptibleUtil.getModData(item);
+		local modData = SusceptibleUtil.getItemModData(item);
 		if modData.hasOxygenTank then
 			local weight = SusceptibleUtil.calculateOxygenTankWeight(SusceptibleUtil.getNormalizedDurability(item))
 			SusceptibleUtil.setWeightChange(item, "oxygenTank", weight);
@@ -270,7 +270,7 @@ function SusceptibleUtil.updateWeight(item)
 end
 
 function SusceptibleUtil.setWeightChange(item, key, amount)
-	local data = SusceptibleUtil.getModData(item);
+	local data = SusceptibleUtil.getItemModData(item);
 
 	local change = amount;
 	if data.weights[key] then
@@ -325,6 +325,17 @@ function SusceptibleUtil.loadUiOffsets()
     if y + BASE_UI_SIZE > height then y = height - BASE_UI_SIZE end
 
     return x, y;
+end
+
+function SusceptibleUtil.setAsPriorityMask(maskItem, playerNum)
+	local player = getSpecificPlayer(playerNum);
+	local modData = player:getModData();
+	modData.susceptiblePriorityMask = maskItem:getID();
+end
+
+function SusceptibleUtil.getPriorityMaskID(player)
+	local modData = player:getModData();
+	return modData.susceptiblePriorityMask;
 end
 
 return SusceptibleUtil;

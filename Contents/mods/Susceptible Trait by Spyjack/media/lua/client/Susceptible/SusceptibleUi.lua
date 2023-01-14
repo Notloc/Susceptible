@@ -111,6 +111,47 @@ function SusceptibleUi:initialise()
     self.maskButton:instantiate();
     self.maskButton:setDisplayBackground(false);
 
+	local this = self
+	self.maskButton.onRightMouseUp = function(self, x, y)
+		local player = getSpecificPlayer(this.playerNum);
+		local mask = SusceptibleMod.getEquippedMaskItemAndData(player);
+		local menu
+		if mask then
+			menu = ISInventoryPaneContextMenu.createMenu(this.playerNum, true, {mask}, self:getAbsoluteX()+x, self:getAbsoluteY()+y+self:getYScroll());
+		else
+			menu = ISContextMenu.get(player, x, y);
+		end
+
+		local allMasks = SusceptibleMod.getAllMaskItems(player);
+		table.sort(allMasks, function(a, b) return SusUtil.getNormalizedDurability(a) < SusUtil.getNormalizedDurability(b) end)
+
+
+		local equippedMasks = {};
+		menu:addOptionOnTop(getText("-"));
+		for _, item in ipairs(allMasks) do
+			local name = item:getDisplayName();
+			local durability = math.floor(SusUtil.getNormalizedDurability(item) * 100);
+
+			if player:isEquippedClothing(item) then
+				table.insert(equippedMasks, item);
+			else
+				menu:addOptionOnTop(name.." - "..durability.."%", {item}, ISInventoryPaneContextMenu.onWearItems, this.playerNum);
+			end
+		end
+
+		for _, item in ipairs(equippedMasks) do
+			if item ~= mask then
+				local name = item:getDisplayName();
+				local durability = math.floor(SusUtil.getNormalizedDurability(item) * 100);
+				menu:addOptionOnTop("[ "..name.." - "..durability.."% ]", item, SusUtil.setAsPriorityMask, this.playerNum);
+			end
+		end
+
+		local mName = mask:getDisplayName();
+		local mDurability = math.floor(SusUtil.getNormalizedDurability(mask) * 100);
+		menu:addOptionOnTop("-[ "..mName.." - "..mDurability.."% ]-", mask, SusUtil.setAsPriorityMask, this.playerNum);
+	end
+
     local oscillateCondition = function() 
             return self.maskDurability <= 0.2; 
         end;
