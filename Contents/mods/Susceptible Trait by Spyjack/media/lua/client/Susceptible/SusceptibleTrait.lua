@@ -432,7 +432,7 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
     if item and not isBroken then
         SusceptibleMod.uiByPlayer[player]:updateMaskInfo(true, SusUtil.getNormalizedDurability(item), threatValue)
     else
-        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(false, 0, threatLevel)
+        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(false, 0, threatLevel*2.5)
     end
 end
 

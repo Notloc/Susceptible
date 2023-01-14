@@ -5,14 +5,14 @@ ISEatFoodAction.start_prepatch_susceptible = ISEatFoodAction.start;
 
 local startEatAction = function(self)
 	if SusceptibleMod.isPlayerSusceptible(self.character) then
-		local threat = SusceptibleMod.threatByPlayer[self.character];
-		if threat and threat > 0 then
-			self:forceStop();
-			return;
-		end
-
 		local mask = SusceptibleMod.getEquippedMaskItemAndData(self.character);
 		if mask then
+			local threat = SusceptibleMod.threatByPlayer[self.character];
+			if threat and threat > 0 then
+				self:forceStop();
+				return;
+			end
+
 			self:stop();
 			self:autoManageMask(mask);
 			return;
