@@ -6,12 +6,18 @@ if not SusceptibleMod then
     SusceptibleMod = {
         uiByPlayer = {},
         threatByPlayer = {},
+        contaminationUiByPlayer = {},
     }
 end
 
 local BASE_INFECTION_DISTANCE = 9;
+local DEAD_BODY_INFECTION_RADIUS = 4;
 local INFECTION_ROLLS_PER_SECOND = 10 -- This number should evenly divide 60. Not a hard requirement, but nicer.
 local maskItems = SusceptibleMaskItems;
+
+local ZOMBIE_THREAT = 2
+local BODY_THREAT = 1
+local THREAT_FALLOFF = 0.3
 
 function SusceptibleMod.getEquippedMaskItemAndData(player)
     local items = player:getInventory():getItems();
@@ -88,19 +94,16 @@ function SusceptibleMod.onPlayerUpdate(player)
     local activeThreatLevel = SusceptibleMod.reduceThreatWithMask(player, threatLevel);
     if activeThreatLevel > 0 then
 
-        local stress = player:getStats():getStress();
-        if stress < 1 then
-            player:getStats():setStress(stress + activeThreatLevel/50);
-        end
-
+        SusceptibleMod.addStress(player, activeThreatLevel)
         local infectionChance = SusceptibleMod.calculateInfectionChance(player, activeThreatLevel);
         --print(infectionChance)
 
         if infectionRoll < infectionChance then
-            if SusceptibleMod.tryLuckySave(player, activeThreatLevel) then
+            if SusceptibleMod.tryLuckySave(player, infectionChance) then
                 return;
             end
 
+            print("INFECTED!")
             if SandboxVars.Susceptible.InstantDeath then
                 player:Kill(player);
             else
@@ -132,12 +135,8 @@ function SusceptibleMod.tryLuckySave(player, infectionChance)
 end
 
 function SusceptibleMod.calculateThreat(player)
-    local infectionDistance = SusceptibleMod.calculateInfectionDistance(player);
     local isOutside = player:isOutside();
-
-    local threatLevel = 0;
-    local paranoiaLevel = 0;
-
+    
     local multiplier = 1;
     if player:getVehicle() then
         multiplier = SusceptibleMod.calculateVehicleInfectionMultiplier(player, player:getVehicle());
@@ -146,21 +145,29 @@ function SusceptibleMod.calculateThreat(player)
     if multiplier == 0 then
         return 0, 0;
     end
+    
+    local threatLevel, paranoiaLevel = SusceptibleMod.calculateDeadBodyThreat(player);
 
+    local contamination = 0
+    if not isOutside then
+        contamination = SusceptibleMod.calculateEnvironmentThreat(player);
+    end
+    threatLevel = threatLevel + contamination;
+
+    SusceptibleMod.updateContaminationDisplay(player, contamination);
+
+    local infectionDistance = SusceptibleMod.calculateInfectionDistance(player);
     local zeds = getCell():getZombieList();
     if zeds:size() > 0 then
         for i = 0, zeds:size() - 1 do
             local zombie = zeds:get(i);
             local distance = player:DistTo(zombie);
             if distance <= infectionDistance then
+                local amount = SusceptibleMod.distanceToThreatLevel(distance, ZOMBIE_THREAT);
                 if zombie:isUseless() then
-                    paranoiaLevel = paranoiaLevel + 2
+                    paranoiaLevel = paranoiaLevel + amount;
                 elseif SusceptibleMod.zombieIsValid(player, zombie, distance, isOutside) then
-                    if distance < 1 then
-                        threatLevel = threatLevel + 2;
-                    else
-                        threatLevel = threatLevel + (2 / (0.75 + distance * 0.25));
-                    end
+                    threatLevel = threatLevel + amount;
                 end
             end
         end
@@ -169,7 +176,60 @@ function SusceptibleMod.calculateThreat(player)
     return threatLevel * multiplier, paranoiaLevel * multiplier;
 end
 
+function SusceptibleMod.calculateDeadBodyThreat(player)
+    local threatLevel = 0;
+    local paranoiaLevel = 0;
+
+    -- get the player's current location
+    local playerSquare = player:getCurrentSquare()
+    if not playerSquare then
+        return 0, 0;
+    end
+
+    local z = playerSquare:getZ();
+    local cell = playerSquare:getCell();
+
+    for x = -DEAD_BODY_INFECTION_RADIUS, DEAD_BODY_INFECTION_RADIUS do
+        for y = -DEAD_BODY_INFECTION_RADIUS, DEAD_BODY_INFECTION_RADIUS do
+            local square = cell:getGridSquare(playerSquare:getX() + x, playerSquare:getY() + y, z);
+            if square then
+                local deadBodys = square:getDeadBodys()
+                for i = 0, deadBodys:size() - 1 do
+                    local deadBody = deadBodys:get(i)
+
+                    if deadBody:isZombie() and not deadBody:isSkeleton() then
+                        local distance = player:DistTo(deadBody);
+                        if SusceptibleMod.zombieIsValid(player, deadBody, distance, player:isOutside()) then
+                            threatLevel = threatLevel + SusceptibleMod.distanceToThreatLevel(distance, BODY_THREAT);
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return threatLevel, paranoiaLevel;
+end
+
+function SusceptibleMod.calculateEnvironmentThreat(player)
+    if SusceptibleContamination then
+        return SusceptibleContamination.getThreatBySquare(player:getCurrentSquare());
+    else
+        return 0;
+    end
+end
+
+function SusceptibleMod.distanceToThreatLevel(distance, threatStrength)
+    if distance < 1 then
+        return threatStrength;
+    else
+        return threatStrength / ((1.0 - THREAT_FALLOFF) + (distance*distance) * THREAT_FALLOFF);
+    end
+end
+
 function SusceptibleMod.calculateInfectionChance(player, threatLevel)
+    -- With the new contamination system, a small amount of threat is usually present inside, so we need to be reasonable about this for playability.
+    threatLevel = threatLevel - 1
+
     local infectionChance = SandboxVars.Susceptible.BaseInfectionChance;
     if player:HasTrait("ProneToIllness") then
         infectionChance = infectionChance * 1.5;
@@ -192,12 +252,33 @@ function SusceptibleMod.calculateInfectionDistance(player)
         infectionDistance = infectionDistance - 2;
     end
     if player:HasTrait("ProneToIllness") then 
-        infectionDistance = infectionDistance + 2;
+        infectionDistance = infectionDistance + 1;
     end
     if player:HasTrait("Resilient") then 
-        infectionDistance = infectionDistance - 2;
+        infectionDistance = infectionDistance - 1;
     end
     return infectionDistance;
+end
+
+function SusceptibleMod.addStress(player, threat)
+    threat = threat - 0.35
+    if threat < 0 then
+        return;
+    end
+
+    local stressDivisor = 150
+    if threat > 1 then
+        stressDivisor = 50
+    end
+
+    if threat > 15 then
+        threat = 15
+    end
+
+    local stress = player:getStats():getStress();
+    if stress < 1 then
+        player:getStats():setStress(stress + threat/stressDivisor);
+    end
 end
 
 local WINDOW_IDS = {
@@ -208,8 +289,20 @@ local WINDOW_IDS = {
 }
 
 function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
+    local mult = SusceptibleMod.calculateVehicleInfectionMultiplierInternal(player, vehicle)
+    if mult > 1 then
+        mult = 1
+    end
+    return mult
+end
+
+function SusceptibleMod.calculateVehicleInfectionMultiplierInternal(player, vehicle)
     local speed = vehicle:getCurrentSpeedKmHour() / 16;
-    if speed ~= 0 and math.abs(speed) < 1 then
+    if speed == 0 then
+        speed = 1
+    end
+
+    if math.abs(speed) < 1 then
         speed = speed/math.abs(speed); -- sets speed to 1, but preserves sign
     end
 
@@ -235,11 +328,7 @@ function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
             if windowPart then
                 local window = windowPart:getWindow();
                 if window and (window:isOpen() or window:isDestroyed()) then
-                    if speed == 0 then
-                        return 0.8
-                    else
-                        return 0.8 / math.abs(speed);
-                    end
+                    return 0.8 / math.abs(speed);
                 end
             end
         end
@@ -253,26 +342,27 @@ function SusceptibleMod.zombieIsValid(player, zombie, distance, playerIsOutside)
         return false;
     end
 
+    local zombieSqr = zombie:getSquare();
+    
     -- Ignore if not in the same environment and more than 2 tiles away
-    local outdoorMismatch = playerIsOutside ~= zombie:isOutside();
+    local outdoorMismatch = playerIsOutside ~= zombieSqr:isOutside();
     if outdoorMismatch and distance > 2 then
         return false;
     end
-
+    
     -- Out of sight, out of mind
-    local canSee = zombie:CanSee(player) or player:CanSee(zombie);
+    local canSee = player:CanSee(zombie);
     if not canSee then
         return false;
     end
-
+    
     -- If we're both outside and see each other, don't bother with pathfinding
     if playerIsOutside and not outdoorMismatch then
         return true;
     end
-
+    
     -- Dumb pathfind straight at the player
     local cell = getCell();
-    local zombieSqr = zombie:getSquare();
     local playerSqr = player:getSquare();
     local z = playerSqr:getZ();
     while playerSqr ~= nil and not playerSqr:equals(zombieSqr) do
@@ -432,8 +522,32 @@ function SusceptibleMod.updateMaskInfoDisplay(player, threatLevel)
     if item and not isBroken then
         SusceptibleMod.uiByPlayer[player]:updateMaskInfo(true, SusUtil.getNormalizedDurability(item), threatValue)
     else
-        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(false, 0, threatLevel*2.5)
+        SusceptibleMod.uiByPlayer[player]:updateMaskInfo(false, 0, threatLevel)
     end
+end
+
+function SusceptibleMod.createContaminationUi(player)
+    if player:isDead() then
+        return;
+    end
+
+    local ui = SusceptibleContaminationUi:new(player:getPlayerNum())
+    ui:initialise();
+    ui:addToUIManager();
+    ui:backMost();
+    SusceptibleMod.contaminationUiByPlayer[player] = ui;
+end
+
+function SusceptibleMod.updateContaminationDisplay(player, contamination)
+    if player:isDead() then
+        return;
+    end
+
+    if not SusceptibleMod.contaminationUiByPlayer[player] then
+        SusceptibleMod.createContaminationUi(player);
+    end
+
+    SusceptibleMod.contaminationUiByPlayer[player]:setContaminationLevel(contamination)
 end
 
 function SusceptibleMod.isPlayerSusceptible(player)

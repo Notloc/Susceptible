@@ -10,6 +10,21 @@ local RED = {r=1, g=0, b=0, a=1}
 local OSCILLATION_DELAY = 12;
 local MASK_BUTTON_X = 11
 
+local DEBUG_X = 52
+local DEBUG_Y_SPACING = 14
+
+local function formatNumber(number)
+	if number < 0.001 then
+		return "0"
+	end
+
+	local numberString = tostring(number)
+	if string.len(numberString) > 6 then
+		numberString = string.sub(numberString, 1, 5)
+	end
+	return numberString
+end
+
 function SusceptibleUi:render()
 	if self:isMouseOver() then
 		self:drawRect(self:getWidth() - 12, 0, 12, 12, 0.5, 1, 1, 1);
@@ -21,6 +36,35 @@ function SusceptibleUi:render()
     else
         self.maskButton:setX(MASK_BUTTON_X);
         self.maskButton.oscillationData.delta = 0;
+	end
+
+	local threatString = formatNumber(self.lastSeenThreatValue * 100)
+	
+	if isDebugEnabled() then
+		self:drawText("DEBUG MODE", DEBUG_X, 0, 1, 1, 1, 1, UIFont.Small);
+		self:drawText("Danger: " .. threatString.."%", DEBUG_X, DEBUG_Y_SPACING, 1, 1, 1, 1, UIFont.Small);
+
+		if SusceptibleContamination then
+			local player = getSpecificPlayer(self.playerNum);
+			if player and player:getCurrentSquare() then
+				local room = player:getCurrentSquare():getRoom();
+				if room then
+					local environmentThreat = SusceptibleContamination.getThreatBySquare(player:getCurrentSquare());
+					
+					if room:getRoomDef():getArea() > 256 then
+						self:drawText("Contamination: " .. formatNumber(environmentThreat), DEBUG_X, DEBUG_Y_SPACING*2, 1, 1, 1, 1, UIFont.Small);
+						self:drawText("Building ID: " .. room:getBuilding():getID(), DEBUG_X, DEBUG_Y_SPACING*4, 1, 1, 1, 1, UIFont.Small);
+						self:drawText("Room too large to show info", DEBUG_X, DEBUG_Y_SPACING*3, 1, 1, 1, 1, UIFont.Small);
+					else
+						local zombieCount, bodyCount = SusceptibleContamination.CountZombiesAndBodiesInRoom(room);
+						self:drawText("Contamination: " .. formatNumber(environmentThreat), DEBUG_X, DEBUG_Y_SPACING*2, 1, 1, 1, 1, UIFont.Small);
+						self:drawText("Building ID: " .. room:getBuilding():getID(), DEBUG_X, DEBUG_Y_SPACING*5, 1, 1, 1, 1, UIFont.Small);
+						self:drawText("Zombies: " .. zombieCount, DEBUG_X, DEBUG_Y_SPACING*3, 1, 1, 1, 1, UIFont.Small);
+						self:drawText("Bodies: " .. bodyCount, DEBUG_X, DEBUG_Y_SPACING*4, 1, 1, 1, 1, UIFont.Small);
+					end
+				end
+			end
+		end
 	end
 end
 
@@ -60,6 +104,7 @@ function SusceptibleUi:updateMaskInfo(hasMask, maskDurability, threatValue)
 	self.hasMask = hasMask;
 	local col = UiUtil.triLerpColors(threatValue, GREY, ORANGE, RED);
 	self.maskBg:setColor(col.r, col.g, col.b);
+	self.lastSeenThreatValue = threatValue;
 end
 
 function SusceptibleUi:new (x, y, playerNum)
