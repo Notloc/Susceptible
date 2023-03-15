@@ -208,8 +208,20 @@ local WINDOW_IDS = {
 }
 
 function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
+    local mult = SusceptibleMod.calculateVehicleInfectionMultiplierInternal(player, vehicle)
+    if mult > 1 then
+        mult = 1
+    end
+    return mult
+end
+
+function SusceptibleMod.calculateVehicleInfectionMultiplierInternal(player, vehicle)
     local speed = vehicle:getCurrentSpeedKmHour() / 16;
-    if speed ~= 0 and math.abs(speed) < 1 then
+    if speed == 0 then
+        speed = 1
+    end
+
+    if math.abs(speed) < 1 then
         speed = speed/math.abs(speed); -- sets speed to 1, but preserves sign
     end
 
@@ -235,11 +247,7 @@ function SusceptibleMod.calculateVehicleInfectionMultiplier(player, vehicle)
             if windowPart then
                 local window = windowPart:getWindow();
                 if window and (window:isOpen() or window:isDestroyed()) then
-                    if speed == 0 then
-                        return 0.8
-                    else
-                        return 0.8 / math.abs(speed);
-                    end
+                    return 0.8 / math.abs(speed);
                 end
             end
         end
