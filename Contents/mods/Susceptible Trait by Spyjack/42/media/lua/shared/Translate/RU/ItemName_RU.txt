@@ -1,0 +1,11 @@
+ItemName_RU = {
+	ItemName_Susceptible.ClothMask = "Маска из ткани",
+	ItemName_Susceptible.GasmaskFilter = "Фильтр от противогаза",
+	ItemName_Susceptible.OxygenTank = "Кислородные баллоны",
+	ItemName_Susceptible.MaskBox_Blue = "Коробка с масками (голубые)",
+	ItemName_Susceptible.MaskBox_Green = "Коробка с масками (зелёные)",
+	ItemName_Susceptible.EmptyMaskBox_Blue = "Пустая коробка от масок (голубые)",
+	ItemName_Susceptible.EmptyMaskBox_Green = "Пустая коробка от масок (зелёные)",
+	ItemName_Susceptible.EmptyDustmaskBox = "Пустая коробка от респираторов",
+	ItemName_Susceptible.DustmaskBox = "Коробка респираторов",
+}

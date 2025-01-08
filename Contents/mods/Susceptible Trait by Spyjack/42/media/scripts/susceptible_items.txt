@@ -1,0 +1,44 @@
+module Susceptible
+{
+	imports
+	{
+		Base
+	}
+/************************ Masks ************************/
+	item ClothMask
+	{
+  DisplayCategory = Accessory,
+		Type = Clothing,
+		DisplayName = Cloth Mask,
+		ClothingItem = Hat_BandanaMaskTINT,
+		BodyLocation = Mask,
+		Icon = Handkerchief,
+		CanHaveHoles  = false,
+        ChanceToFall = 30,
+        Insulation = 0.10,
+		Weight = 0.1, 
+    }
+
+/************************ Repair Items ************************/
+
+	item GasmaskFilter
+    {
+		DisplayCategory = Accessory,
+        Weight	=	1.0,
+        Type	=	Normal,
+        DisplayName	=	Gas Mask Filter,
+        Icon	=	GasmaskFilter,
+        WorldStaticModel = GasmaskFilter,
+    }
+
+	item OxygenTank
+    {
+		DisplayCategory = Accessory,
+        Weight	=	5.0,
+        Type	=	Normal,
+        DisplayName	=	Oxygen Tank,
+        Icon	=	OxygenTank,
+        WorldStaticModel = OxygenTank,
+    }	
+	
+}

@@ -1,0 +1,75 @@
+module Susceptible
+{
+	imports
+	{
+		Base
+	}
+	
+recipe Create Cloth Mask
+	{
+		RippedSheets/AlcoholRippedSheets,
+
+		Result:ClothMask,
+		Time:200.0,
+		Sound:PutItemInBag,
+		AnimNode:RipSheets,
+		Category:General,
+		OnGiveXP:Recipe.OnGiveXP.None,
+		NeedToBeLearn:false,
+	}
+recipe Open Box of Face Masks
+    {
+		destroy MaskBox_Blue,
+		Result:Hat_SurgicalMask_Blue=50,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+		OnCreate:OpenMaskBoxBlue
+    }	
+recipe Put Face Masks in Box
+    {
+		Hat_SurgicalMask_Blue=50,
+		EmptyMaskBox_Blue,
+		Result:MaskBox_Blue,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+    }	
+recipe Open Box of Face Masks
+    {
+		destroy MaskBox_Green,
+		Result:Hat_SurgicalMask_Green=50,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+		OnCreate:OpenMaskBoxGreen
+    }
+recipe Put Face Masks in Box
+    {
+		Hat_SurgicalMask_Green=50,
+		EmptyMaskBox_Green,
+		Result:MaskBox_Green,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+    }
+recipe Open Box of Dust Masks
+    {
+		destroy DustmaskBox,
+		Result:Hat_DustMask=10,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+		OnCreate:OpenDustmaskBox
+    }
+recipe Put Dust Masks in Box
+    {
+		Hat_DustMask=10,
+		EmptyDustmaskBox,
+		Result:DustmaskBox,
+		Time:5.0,
+		Category:Misc,
+		Sound:PutItemInBag,
+    }	
+	
+}
